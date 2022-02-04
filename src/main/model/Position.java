@@ -12,15 +12,15 @@ public class Position {
     public static Position calcNextPosition(Position position, Velocity velocity) {
         double nextPosX;
         double nextPosY;
-        nextPosX = position.getPositionX() + (velocity.getVelocityX() / Rocket.TICKS_PER_SECOND);
-        nextPosY = position.getPositionY() + (velocity.getVelocityY() / Rocket.TICKS_PER_SECOND);
+        nextPosX = position.getPositionX() + (velocity.getVelocityX() / LaunchPad.TICKS_PER_SECOND);
+        nextPosY = position.getPositionY() + (velocity.getVelocityY() / LaunchPad.TICKS_PER_SECOND);
         return new Position(nextPosX, nextPosY);
     }
 
     public static boolean checkBounds(Position position) {
         boolean hasLanded = position.getPositionY() < 0;
-        boolean hitHeightLimit = position.getPositionY() > Rocket.HEIGHT_LIMIT;
-        boolean hitXLimit = (position.getPositionX() > Rocket.RANGE_LIMIT) || (position.getPositionX() < 0);
+        boolean hitHeightLimit = position.getPositionY() > LaunchPad.HEIGHT_LIMIT;
+        boolean hitXLimit = (position.getPositionX() > LaunchPad.RANGE_LIMIT) || (position.getPositionX() < 0);
         return hasLanded || hitHeightLimit || hitXLimit;
     }
 

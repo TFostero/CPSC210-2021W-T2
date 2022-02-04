@@ -8,6 +8,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class FuelTest {
     private Fuel testFuel;
     private double testFuelMass = 0;
+    private double testThrust = 0;
 
     @BeforeEach
     void runBefore() {
@@ -21,13 +22,16 @@ public class FuelTest {
 
     @Test
     void calcNextFuelMassTest() {
-        testFuel = Fuel.calcNextFuelMass(testFuelMass);
+        testFuel = Fuel.calcNextFuelMass(testFuelMass, testThrust);
+        assertEquals(0, testFuel.getFuelMass());
+        testThrust = 1000;
+        testFuel = Fuel.calcNextFuelMass(testFuelMass, testThrust);
         assertEquals(0, testFuel.getFuelMass());
 
-        testFuelMass = 2 * (Rocket.BURN_RATE / Rocket.TICKS_PER_SECOND);
+        testFuelMass = 2 * (testThrust * LaunchPad.BURN_RATE_TO_FUEL_RATIO / LaunchPad.TICKS_PER_SECOND);
         double nextFuelMass;
-        testFuel = Fuel.calcNextFuelMass(testFuelMass);
-        nextFuelMass = testFuelMass - (Rocket.BURN_RATE / Rocket.TICKS_PER_SECOND);
+        testFuel = Fuel.calcNextFuelMass(testFuelMass, testThrust);
+        nextFuelMass = testFuelMass - (testThrust * LaunchPad.BURN_RATE_TO_FUEL_RATIO / LaunchPad.TICKS_PER_SECOND);
         assertEquals(nextFuelMass, testFuel.getFuelMass());
     }
 }

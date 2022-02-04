@@ -13,8 +13,8 @@ public class Velocity {
         double nextVelX;
         double nextVelY;
 
-        nextVelX = velocity.getVelocityX() + (accel.getAccelX() / Rocket.TICKS_PER_SECOND);
-        nextVelY = velocity.getVelocityY() + (accel.getAccelY() / Rocket.TICKS_PER_SECOND);
+        nextVelX = velocity.getVelocityX() + (accel.getAccelX() / LaunchPad.TICKS_PER_SECOND);
+        nextVelY = velocity.getVelocityY() + (accel.getAccelY() / LaunchPad.TICKS_PER_SECOND);
 
         return new Velocity(nextVelX, nextVelY);
     }

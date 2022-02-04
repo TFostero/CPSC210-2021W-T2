@@ -25,7 +25,7 @@ public class AccelerationTest {
     void calcNextAccelTest() {
         testAcceleration = Acceleration.calcNextAccel(0, 0, 0);
         assertEquals(0, testAcceleration.getAccelX());
-        assertEquals(Rocket.GRAVITY, testAcceleration.getAccelY());
+        assertEquals(LaunchPad.GRAVITY, testAcceleration.getAccelY());
 
         double nextAccelX;
         double nextAccelY;
@@ -33,8 +33,8 @@ public class AccelerationTest {
         double testThrust = 1000;
         double testAngle = 0;
         testAcceleration = Acceleration.calcNextAccel(testAngle, testFuel, testThrust);
-        nextAccelX = (testThrust * (Math.cos(testAngle))) / (testFuel + Rocket.EMPTY_MASS);
-        nextAccelY = ((testThrust * (Math.sin(testAngle))) / (testFuel + Rocket.EMPTY_MASS)) + Rocket.GRAVITY;
+        nextAccelX = (testThrust * (Math.cos(testAngle))) / (testFuel + LaunchPad.EMPTY_MASS);
+        nextAccelY = ((testThrust * (Math.sin(testAngle))) / (testFuel + LaunchPad.EMPTY_MASS)) + LaunchPad.GRAVITY;
         assertEquals(nextAccelX, testAcceleration.getAccelX());
         assertEquals(nextAccelY, testAcceleration.getAccelY());
     }

@@ -14,11 +14,11 @@ public class Acceleration {
         double nextAccelY;
 
         if (fuelMass > 0) {
-            nextAccelX = (thrust * (Math.cos(flightAngle))) / (fuelMass + Rocket.EMPTY_MASS);
-            nextAccelY = ((thrust * (Math.sin(flightAngle))) / (fuelMass + Rocket.EMPTY_MASS)) + Rocket.GRAVITY;
+            nextAccelX = (thrust * (Math.cos(flightAngle))) / (fuelMass + LaunchPad.EMPTY_MASS);
+            nextAccelY = ((thrust * (Math.sin(flightAngle))) / (fuelMass + LaunchPad.EMPTY_MASS)) + LaunchPad.GRAVITY;
         } else {
             nextAccelX = 0;
-            nextAccelY = Rocket.GRAVITY;
+            nextAccelY = LaunchPad.GRAVITY;
         }
 
         return new Acceleration(nextAccelX, nextAccelY);

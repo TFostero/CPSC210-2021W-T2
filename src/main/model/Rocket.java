@@ -1,35 +1,44 @@
 package model;
 
-import ui.Terminal;
-
+import ui.LogEntry;
 import java.util.ArrayList;
-import java.lang.Math;
+import java.util.Collections;
 
 public class Rocket {
-    private ArrayList<Position> flightPath;
+    private static ArrayList<Position> flightPath;
+    private static ArrayList<Velocity> flightVelocities;
+    private static ArrayList<Acceleration> flightAccelerations;
+    private static ArrayList<Fuel> flightFuels;
+    private static ArrayList<FlightAngle> flightAngles;
+    private static ArrayList<Double> flightTimes;
+    private ArrayList<Double> velocityMagnitudes;
+    private ArrayList<Double> altitudes;
     private Position position;
     private Velocity velocity;
     private Acceleration acceleration;
     private Fuel fuel;
     private FlightAngle flightAngle;
-    private double flightTime;
-    public static final double EMPTY_MASS = 50;
-    private static final double THRUST = 25000;
-    public static final double BURN_RATE = 10;
-    private static final double STARTING_FUEL = 25;
-    public static final double TICKS_PER_SECOND = 30;
-    private static final double LAUNCH_ANGLE = 1.22;
-    public static final double GRAVITY = -9.81;
-    public static final double HEIGHT_LIMIT = 250000;
-    public static final double RANGE_LIMIT = 250000;
+    private static double thrust;
+    private static double flightTime;
+    private static double maxVelocity;
+    private static double maxAltitude;
+    private static double flightDistance;
 
-    public Rocket() {
+    public Rocket(FlightParameters launchParameters) {
         flightPath = new ArrayList<>();
-        position = new Position(0, 0);
-        velocity = new Velocity(0, 0);
-        acceleration = new Acceleration(0, 0);
-        fuel = new Fuel(STARTING_FUEL);
-        flightAngle = new FlightAngle(LAUNCH_ANGLE);
+        flightVelocities = new ArrayList<>();
+        flightAccelerations = new ArrayList<>();
+        flightFuels = new ArrayList<>();
+        flightAngles = new ArrayList<>();
+        flightTimes = new ArrayList<>();
+        velocityMagnitudes = new ArrayList<>();
+        altitudes = new ArrayList<>();
+        position = launchParameters.getPosition();
+        velocity = launchParameters.getVelocity();
+        acceleration = launchParameters.getAcceleration();
+        fuel = launchParameters.getFuel();
+        flightAngle = launchParameters.getFlightAngle();
+        thrust = launchParameters.getThrust();
 
         launchRocket();
     }
@@ -37,42 +46,70 @@ public class Rocket {
     public void launchRocket() {
         while (!Position.checkBounds(position)) {
             flightPath.add(position);
-            printOutputs();
-            flightTime += 1 / TICKS_PER_SECOND;
+            flightVelocities.add(velocity);
+            flightAccelerations.add(acceleration);
+            flightFuels.add(fuel);
+            flightAngles.add(flightAngle);
+            flightTimes.add(flightTime);
+
+            velocityMagnitudes.add(Math.hypot(velocity.getVelocityX(), velocity.getVelocityY()));
+            altitudes.add(position.getPositionY());
+
             nextRocket();
         }
-    }
+        maxVelocity = Collections.max(velocityMagnitudes);
+        maxAltitude = Collections.max(altitudes);
+        flightDistance = position.getPositionX();
 
-    private void printOutputs() {
-        System.out.print("Position: ");
-        System.out.printf("%.2f", position.getPositionX());
-        System.out.print(" ");
-        System.out.printf("%.2f", position.getPositionY());
-
-        System.out.print("  Velocity: ");
-        System.out.printf("%.2f", velocity.getVelocityX());
-        System.out.print(" ");
-        System.out.printf("%.2f", velocity.getVelocityY());
-
-        System.out.print("  Acceleration: ");
-        System.out.printf("%.2f", acceleration.getAccelX());
-        System.out.print(" ");
-        System.out.printf("%.2f", acceleration.getAccelY());
-
-        System.out.print("  Flight Angle: ");
-        System.out.printf("%.2f", flightAngle.getAngle());
-
-        System.out.print("  Flight Time: ");
-        System.out.printf("%.2f", flightTime);
-        System.out.println();
+        LogEntry.processOutputs();
     }
 
     private void nextRocket() {
-        acceleration = Acceleration.calcNextAccel(flightAngle.getAngle(), fuel.getFuelMass(), THRUST);
+        acceleration = Acceleration.calcNextAccel(flightAngle.getAngle(), fuel.getFuelMass(), thrust);
         velocity = Velocity.calcNextVelocity(velocity, acceleration);
         position = Position.calcNextPosition(position, velocity);
         flightAngle = FlightAngle.nextFlightAngle(velocity);
-        fuel = Fuel.calcNextFuelMass(fuel.getFuelMass());
+        fuel = Fuel.calcNextFuelMass(fuel.getFuelMass(), thrust);
+        flightTime += 1 / LaunchPad.TICKS_PER_SECOND;
     }
 
+    public static double getMaxVelocity() {
+        return maxVelocity;
+    }
+
+    public static double getMaxAltitude() {
+        return maxAltitude;
+    }
+
+    public static double getFlightDistance() {
+        return flightDistance;
+    }
+
+    public static double getFlightTime() {
+        return flightTime;
+    }
+
+    public static ArrayList<Position> getFlightPath() {
+        return flightPath;
+    }
+
+    public static ArrayList<Velocity> getFlightVelocities() {
+        return flightVelocities;
+    }
+
+    public static ArrayList<Acceleration> getFlightAccelerations() {
+        return flightAccelerations;
+    }
+
+    public static ArrayList<FlightAngle> getFlightAngles() {
+        return flightAngles;
+    }
+
+    public static ArrayList<Fuel> getFlightFuels() {
+        return flightFuels;
+    }
+
+    public static ArrayList<Double> getFlightTimes() {
+        return flightTimes;
+    }
 }

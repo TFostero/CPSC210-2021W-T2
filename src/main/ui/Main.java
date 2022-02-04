@@ -1,9 +1,10 @@
 package ui;
 
-import model.Rocket;
+import model.LaunchPad;
 
 public class Main {
     public static void main(String[] args) {
-        new Rocket();
+        new LogEntry();
+        // System.exit(0);
     }
 }

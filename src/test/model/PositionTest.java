@@ -29,8 +29,8 @@ public class PositionTest {
         double testVelocityY = -3;
         Velocity testVelocity = new Velocity(testVelocityX, testVelocityY);
         testPosition = Position.calcNextPosition(testPosition, testVelocity);
-        nextPosX = testX + (testVelocityX / Rocket.TICKS_PER_SECOND);
-        nextPosY = testY + (testVelocityY / Rocket.TICKS_PER_SECOND);
+        nextPosX = testX + (testVelocityX / LaunchPad.TICKS_PER_SECOND);
+        nextPosY = testY + (testVelocityY / LaunchPad.TICKS_PER_SECOND);
         assertEquals(nextPosX, testPosition.getPositionX());
         assertEquals(nextPosY, testPosition.getPositionY());
     }
@@ -42,15 +42,15 @@ public class PositionTest {
         assertFalse(Position.checkBounds(testPosition));
         testPosition = new Position(-1, 0);
         assertTrue(Position.checkBounds(testPosition));
-        testPosition = new Position(0, Rocket.HEIGHT_LIMIT);
+        testPosition = new Position(0, LaunchPad.HEIGHT_LIMIT);
         assertFalse(Position.checkBounds(testPosition));
-        testPosition = new Position(0, Rocket.HEIGHT_LIMIT + 1);
+        testPosition = new Position(0, LaunchPad.HEIGHT_LIMIT + 1);
         assertTrue(Position.checkBounds(testPosition));
-        testPosition = new Position(Rocket.RANGE_LIMIT, 0);
+        testPosition = new Position(LaunchPad.RANGE_LIMIT, 0);
         assertFalse(Position.checkBounds(testPosition));
-        testPosition = new Position(Rocket.RANGE_LIMIT + 1, 0);
+        testPosition = new Position(LaunchPad.RANGE_LIMIT + 1, 0);
         assertTrue(Position.checkBounds(testPosition));
-        testPosition = new Position(Rocket.RANGE_LIMIT + 1, Rocket.HEIGHT_LIMIT + 1);
+        testPosition = new Position(LaunchPad.RANGE_LIMIT + 1, LaunchPad.HEIGHT_LIMIT + 1);
         assertTrue(Position.checkBounds(testPosition));
     }
 }

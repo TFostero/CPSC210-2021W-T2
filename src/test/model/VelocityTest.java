@@ -28,8 +28,8 @@ public class VelocityTest {
         double testAccelX = 5;
         double testAccelY = -3;
         Acceleration testAccel = new Acceleration(testAccelX, testAccelY);
-        nextVelX = testX + (testAccelX / Rocket.TICKS_PER_SECOND);
-        nextVelY = testY + (testAccelY / Rocket.TICKS_PER_SECOND);
+        nextVelX = testX + (testAccelX / LaunchPad.TICKS_PER_SECOND);
+        nextVelY = testY + (testAccelY / LaunchPad.TICKS_PER_SECOND);
         testVelocity = Velocity.calcNextVelocity(testVelocity, testAccel);
         assertEquals(nextVelX, testVelocity.getVelocityX());
         assertEquals(nextVelY, testVelocity.getVelocityY());
