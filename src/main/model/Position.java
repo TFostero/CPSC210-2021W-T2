@@ -1,14 +1,19 @@
 package model;
 
+/*
+ * represents position of an object
+ */
 public class Position {
     private double positionX;
     private double positionY;
 
+    // EFFECT: constructs position object with given x and y position
     public Position(double positionX, double positionY) {
         this.positionX = positionX;
         this.positionY = positionY;
     }
 
+    // EFFECT: calculates the next position given the current position and velocity
     public static Position calcNextPosition(Position position, Velocity velocity) {
         double nextPosX;
         double nextPosY;
@@ -17,6 +22,7 @@ public class Position {
         return new Position(nextPosX, nextPosY);
     }
 
+    // EFFECT: returns true if the object is out of the game bounds or rocket has landed
     public static boolean checkBounds(Position position) {
         boolean hasLanded = position.getPositionY() < 0;
         boolean hitHeightLimit = position.getPositionY() > LaunchPad.HEIGHT_LIMIT;
