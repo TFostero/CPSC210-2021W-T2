@@ -5,9 +5,8 @@ import java.util.ArrayList;
 
 /*
  * Represents the launch pad from which multiple rockets will be launched
+ * Includes all constants to be used in the program
  */
-// TODO: make createRocket and initializeRockets public methods and call from inputLogging
-//       move outputLogging constructor to inputLogging and make system exit call in outputLogging
 public class LaunchPad {
     private ArrayList<Rocket> rockets;
     private ArrayList<FlightParameters> launchParameters;

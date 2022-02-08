@@ -14,6 +14,7 @@ public class Rocket {
     private FlightParameters flightParameters;
 
     // EFFECT: construct a new rocket object with given initial FlightParameters
+    //         logs initial flight parameters into flightHistory
     public Rocket(FlightParameters launchParameters) {
         flightHistory = new ArrayList<>();
         flightParameters = launchParameters;
@@ -107,6 +108,7 @@ public class Rocket {
         flightHistory.add(param);
     }
 
+    // EFFECT: returns true if rocket is in bounds
     public boolean inBounds() {
         double positionX = flightParameters.getPosition().getPositionX();
         double positionY = flightParameters.getPosition().getPositionY();

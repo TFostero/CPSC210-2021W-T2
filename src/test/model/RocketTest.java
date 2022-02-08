@@ -36,7 +36,6 @@ class RocketTest {
         Acceleration testAccelB = new Acceleration(0, LaunchPad.GRAVITY);
         Fuel testFuel = new Fuel(0);
 
-
         testParams = new FlightParameters(LaunchPad.STARTING_POSITION,
                 LaunchPad.STARTING_VELOCITY,
                 testAccelA,
@@ -46,7 +45,6 @@ class RocketTest {
                 LaunchPad.START_TIME);
 
         testAccelA = testRocket.calcNextAccel(testFlightAngle, testFuel, testThrust);
-
         assertEquals(testAccelA.getAccelX(), testAccelB.getAccelX());
         assertEquals(testAccelA.getAccelY(), testAccelB.getAccelY());
     }
@@ -89,6 +87,7 @@ class RocketTest {
         Position testPositionB = new Position(0, -1);
         Position testPositionC = new Position(0, LaunchPad.HEIGHT_LIMIT + 1);
         Position testPositionD = new Position(LaunchPad.RANGE_LIMIT + 1, 0);
+        Position testPositionE = new Position(LaunchPad.RANGE_LIMIT + 1, -1);
         updateRocketPosition(testPositionA);
         assertTrue(testRocket.inBounds());
         updateRocketPosition(testPositionB);
@@ -96,6 +95,8 @@ class RocketTest {
         updateRocketPosition(testPositionC);
         assertFalse(testRocket.inBounds());
         updateRocketPosition(testPositionD);
+        assertFalse(testRocket.inBounds());
+        updateRocketPosition(testPositionE);
         assertFalse(testRocket.inBounds());
     }
 

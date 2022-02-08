@@ -9,6 +9,7 @@ import java.util.Scanner;
 /*
  * Represents the initial user prompts for number of rockets,
  * rocket launch angle, rocket fuel, and rocket thrust
+ * and handles output of the rocket data in the console
  */
 public class IOLogging {
     private Scanner scanner;
