@@ -33,23 +33,6 @@ public class FlightParameters {
         this.flightTime = flightTime;
     }
 
-    // MODIFIES: TODO: what does this modify?
-    // EFFECTS: returns the next FlightParameters that have been calculated based on the
-    //          current FlightParameters and time base used
-    /*
-    public static FlightParameters calcNextParameters(FlightParameters params) {
-        params.acceleration = Acceleration.calcNextAccel(params.flightAngle, params.fuel, params.thrust);
-        params.velocity = Velocity.calcNextVelocity(params.velocity, params.acceleration);
-        params.position = Position.calcNextPosition(params.position, params.velocity);
-        params.flightAngle = FlightAngle.nextFlightAngle(params.velocity);
-        params.fuel = Fuel.calcNextFuelMass(params.fuel, params.thrust);
-        params.flightTime += 1 / LaunchPad.TICKS_PER_SECOND;
-
-        return params;
-    }
-
-     */
-
     // EFFECT: creates a new clone of FlightParameters
     public static FlightParameters cloneFlightParameters(FlightParameters params) {
         FlightParameters tempParam = new FlightParameters(params.getPosition(),

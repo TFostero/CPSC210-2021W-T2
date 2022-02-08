@@ -82,18 +82,34 @@ class RocketTest {
         assertTrue(testParams.getFuel().equals(testParamsB.getFuel()));
         assertEquals(testParams.getFlightTime(), testParamsB.getFlightTime());
     }
-}
 
-/*
-// EFFECT: calculates next fuel amount depending on amount of thrust the rocket has
-    public Fuel calcNextFuelMass(Fuel fuel, double thrust) {
-        double nextFuelMass;
-        double burnRate = calcBurnRate(thrust);
-        if (fuel.getFuelMass() - (burnRate / LaunchPad.TICKS_PER_SECOND) > 0) {
-            nextFuelMass = fuel.getFuelMass() - (burnRate / LaunchPad.TICKS_PER_SECOND);
-        } else {
-            nextFuelMass = 0;
-        }
-        return new Fuel(nextFuelMass);
+    @Test
+    void inBoundsTest() {
+        Position testPositionA = new Position(0, 0);
+        Position testPositionB = new Position(0, -1);
+        Position testPositionC = new Position(0, LaunchPad.HEIGHT_LIMIT + 1);
+        Position testPositionD = new Position(LaunchPad.RANGE_LIMIT + 1, 0);
+        updateRocketPosition(testPositionA);
+        assertTrue(testRocket.inBounds());
+        updateRocketPosition(testPositionB);
+        assertFalse(testRocket.inBounds());
+        updateRocketPosition(testPositionC);
+        assertFalse(testRocket.inBounds());
+        updateRocketPosition(testPositionD);
+        assertFalse(testRocket.inBounds());
     }
- */
+
+
+    // MODIFIES: this
+    // EFFECT: updates test rocket with provided position
+    void updateRocketPosition(Position p) {
+        testParams = new FlightParameters(p,
+                LaunchPad.STARTING_VELOCITY,
+                LaunchPad.STARTING_ACCELERATION,
+                testFlightAngle,
+                testFuel,
+                testThrust,
+                LaunchPad.START_TIME);
+        testRocket = new Rocket(testParams);
+    }
+}

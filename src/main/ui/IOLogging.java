@@ -5,23 +5,60 @@ import model.*;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-/*
- * Handles the outputs of a given list of rockets
- */
-public class OutputLogging {
-    private Scanner scanner;
 
-    // EFFECT: constructs OutputLogging object with given list of rockets
-    //         in order to handle the data output
-    public OutputLogging(ArrayList<Rocket> rockets) {
+/*
+ * Represents the initial user prompts for number of rockets,
+ * rocket launch angle, rocket fuel, and rocket thrust
+ */
+public class IOLogging {
+    private Scanner scanner;
+    private ArrayList<FlightAngle> launchAngles;
+    private ArrayList<Fuel> launchFuels;
+    private ArrayList<Double> launchThrusts;
+
+    // EFFECT: constructs an object that will consume user inputs in the console
+    public IOLogging() {
+        launchAngles = new ArrayList<>();
+        launchFuels = new ArrayList<>();
+        launchThrusts = new ArrayList<>();
         scanner = new Scanner(System.in);
-        processOutputs(rockets);
+        processIO();
+    }
+
+    // MODIFIES: this
+    // EFFECT: prompts user for inputs to initialize the rocket launches
+    //         creates a LaunchPad object and initializes the FlightParameters used for launch,
+    //         tells the LaunchPad to create and launch rockets and then output results
+    private void processIO() {
+        while (true) {
+            System.out.print("Please enter number of rockets to launch: ");
+            int rocketLaunches = scanner.nextInt();
+
+            for (int i = 0; i < rocketLaunches; i++) {
+                System.out.print("Please enter rocket " + (i + 1) + " launch angle (0 - 90 Deg): ");
+                double angle = scanner.nextDouble();
+                angle = degreesToRads(angle);
+                launchAngles.add(new FlightAngle(angle));
+                System.out.print("Please enter rocket " + (i + 1) + " starting fuel (0 - 100 kG): ");
+                double fuel = scanner.nextDouble();
+                launchFuels.add(new Fuel(fuel));
+                System.out.print("Please enter rocket " + (i + 1) + " thrust (0 - 1000 kN): ");
+                double thrust = scanner.nextDouble();
+                launchThrusts.add(thrust * 1000);
+            }
+            scanner.nextLine();
+            LaunchPad pad = new LaunchPad();
+            pad.initLaunchParams(launchAngles, launchThrusts, launchFuels);
+            pad.createRockets();
+            pad.launchRockets();
+            processOutputs(pad.getRockets());
+        }
     }
 
     // EFFECT: processes the outputs for a given list of rockets
     //         first outputs default values, then checks if the user
     //         would like to see detailed flight information
-    public void processOutputs(ArrayList<Rocket> rockets) {
+    private void processOutputs(ArrayList<Rocket> rockets) {
         outputDefaults(rockets);
         String userAnswer = "";
         int rocketIndex = 1;
@@ -123,5 +160,16 @@ public class OutputLogging {
     private static double radsToDegrees(double radians) {
         return radians * (180 / Math.PI);
     }
-}
 
+
+    // EFFECT: converts degrees into radians
+    private double degreesToRads(double degrees) {
+        return degrees * (Math.PI / 180);
+    }
+
+
+    // EFFECT: start the input logging in the console
+    public static void main(String[] args) {
+        new IOLogging();
+    }
+}

@@ -1,12 +1,7 @@
 package model;
 
 
-import ui.OutputLogging;
-
-import java.lang.reflect.Array;
 import java.util.ArrayList;
-
-import static model.Rocket.*;
 
 /*
  * Represents the launch pad from which multiple rockets will be launched
