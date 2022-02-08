@@ -114,8 +114,9 @@ public class Rocket {
         double positionY = flightParameters.getPosition().getPositionY();
         boolean notLanded = positionY >= 0;
         boolean notHeightLimit = positionY <= LaunchPad.HEIGHT_LIMIT;
-        boolean notXLimit = (positionX <= LaunchPad.RANGE_LIMIT) && (positionX >= 0);
-        return notLanded && notHeightLimit && notXLimit;
+        boolean notRangeLimit = (positionX <= LaunchPad.RANGE_LIMIT);
+        boolean notNegativeX = (positionX >= 0);
+        return notLanded && notHeightLimit && notRangeLimit && notNegativeX;
     }
 
     // EFFECT: finds and returns the maximum velocity magnitude

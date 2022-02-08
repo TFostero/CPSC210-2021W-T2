@@ -83,11 +83,11 @@ class RocketTest {
 
     @Test
     void inBoundsTest() {
-        Position testPositionA = new Position(0, 0);
-        Position testPositionB = new Position(0, -1);
-        Position testPositionC = new Position(0, LaunchPad.HEIGHT_LIMIT + 1);
-        Position testPositionD = new Position(LaunchPad.RANGE_LIMIT + 1, 0);
-        Position testPositionE = new Position(LaunchPad.RANGE_LIMIT + 1, -1);
+        Position testPositionA = new Position(0, 0); // in bounds
+        Position testPositionB = new Position(0, -1); // landed
+        Position testPositionC = new Position(0, LaunchPad.HEIGHT_LIMIT + 1); // over height limit
+        Position testPositionD = new Position(LaunchPad.RANGE_LIMIT + 1, 0); // over range limit
+        Position testPositionE = new Position(-1, 0); // over range limit and
         updateRocketPosition(testPositionA);
         assertTrue(testRocket.inBounds());
         updateRocketPosition(testPositionB);
