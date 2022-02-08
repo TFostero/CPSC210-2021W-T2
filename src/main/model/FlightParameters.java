@@ -36,6 +36,7 @@ public class FlightParameters {
     // MODIFIES: TODO: what does this modify?
     // EFFECTS: returns the next FlightParameters that have been calculated based on the
     //          current FlightParameters and time base used
+    /*
     public static FlightParameters calcNextParameters(FlightParameters params) {
         params.acceleration = Acceleration.calcNextAccel(params.flightAngle, params.fuel, params.thrust);
         params.velocity = Velocity.calcNextVelocity(params.velocity, params.acceleration);
@@ -46,6 +47,8 @@ public class FlightParameters {
 
         return params;
     }
+
+     */
 
     // EFFECT: creates a new clone of FlightParameters
     public static FlightParameters cloneFlightParameters(FlightParameters params) {

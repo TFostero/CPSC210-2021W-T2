@@ -49,6 +49,7 @@ public class FlightParametersTest {
         assertEquals(newParam.getFlightTime(), testParams.getFlightTime());
     }
 
+    /*
     @Test
     void calcNextParametersTest() {
         Acceleration testAccelB = Acceleration.calcNextAccel(testFlightAngle, testFuel, testThrust);
@@ -98,4 +99,6 @@ public class FlightParametersTest {
         testParams = FlightParameters.calcNextParameters(testParams);
         assertEquals(testTimeB, testParams.getFlightTime());
     }
+
+     */
 }

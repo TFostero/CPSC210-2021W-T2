@@ -11,12 +11,6 @@ public class FlightAngle {
         this.angle = angle;
     }
 
-    // EFFECT: calculates the next flight angle using given velocity
-    public static FlightAngle nextFlightAngle(Velocity velocity) {
-        double nextAngle = Math.atan(velocity.getVelocityY() / velocity.getVelocityX());
-        return new FlightAngle(nextAngle);
-    }
-
     public double getAngle() {
         return angle;
     }

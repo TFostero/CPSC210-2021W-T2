@@ -2,7 +2,11 @@ package model;
 
 
 import ui.OutputLogging;
+
+import java.lang.reflect.Array;
 import java.util.ArrayList;
+
+import static model.Rocket.*;
 
 /*
  * Represents the launch pad from which multiple rockets will be launched
@@ -12,12 +16,6 @@ import java.util.ArrayList;
 public class LaunchPad {
     private ArrayList<Rocket> rockets;
     private ArrayList<FlightParameters> launchParameters;
-    private Fuel launchFuel;
-    private FlightAngle launchAngle;
-    private ArrayList<FlightAngle> launchAngles;
-    private ArrayList<Fuel> launchFuels;
-    private ArrayList<Double> launchThrusts;
-    private double launchThrust;
     public static final Position STARTING_POSITION = new Position(0, 0);
     public static final Velocity STARTING_VELOCITY = new Velocity(0,0);
     public static final Acceleration STARTING_ACCELERATION = new Acceleration(0,0);
@@ -32,27 +30,19 @@ public class LaunchPad {
     // EFFECT: constructs a launch pad with given inputs
     //         creates and launches rockets and then creates
     //         a OutputLogging object to output the results
-    public LaunchPad(ArrayList<FlightAngle> angles, ArrayList<Double> thrusts, ArrayList<Fuel> fuels) {
-        launchAngles = angles;
-        launchThrusts = thrusts;
-        launchFuels = fuels;
+    public LaunchPad() {
         launchParameters = new ArrayList<>();
         rockets = new ArrayList<>();
-        initializeLaunchParameters();
-        createRockets();
-        launchRockets();
-        new OutputLogging(rockets);
-        System.exit(0);
     }
 
     // MODIFIES: this
     // EFFECT: creates first FlightParameters objects to be used for rocket flight
-    private void initializeLaunchParameters() {
-        int numberOfRockets = launchAngles.size();
+    public void initLaunchParams(ArrayList<FlightAngle> a, ArrayList<Double> t, ArrayList<Fuel> f) {
+        int numberOfRockets = a.size();
         for (int i = 0; i < numberOfRockets; i++) {
-            launchFuel = launchFuels.get(i);
-            launchThrust = launchThrusts.get(i);
-            launchAngle = launchAngles.get(i);
+            Fuel launchFuel = f.get(i);
+            double launchThrust = t.get(i);
+            FlightAngle launchAngle = a.get(i);
             launchParameters.add(new FlightParameters(STARTING_POSITION,
                     STARTING_VELOCITY,
                     STARTING_ACCELERATION,
@@ -66,7 +56,7 @@ public class LaunchPad {
     // MODIFIES: this
     // EFFECT: creates rockets with FlightParameters created in
     //         initializeLaunchParameters method
-    private void createRockets() {
+    public void createRockets() {
         for (FlightParameters params : launchParameters) {
             rockets.add(new Rocket(params));
         }
@@ -75,15 +65,19 @@ public class LaunchPad {
     // MODIFIES: this
     // EFFECTS: launches the rockets by continuously calling nextRocket on each
     //          of the rocket objects as long as the rocket is in bounds
-    private void launchRockets() {
+    public void launchRockets() {
         for (Rocket rocket : rockets) {
-            FlightParameters currentParams = rocket.getFlightParameters();
-            Position currentPosition = currentParams.getPosition();
-            while (!Position.checkBounds(currentPosition)) {
+            while (rocket.inBounds()) {
                 rocket.nextRocket();
-                currentParams = rocket.getFlightParameters();
-                currentPosition = currentParams.getPosition();
             }
         }
+    }
+
+    public ArrayList<Rocket> getRockets() {
+        return rockets;
+    }
+
+    public ArrayList<FlightParameters> getLaunchParameters() {
+        return launchParameters;
     }
 }

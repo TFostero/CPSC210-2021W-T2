@@ -24,23 +24,4 @@ public class AccelerationTest {
         assertEquals(testX, testAcceleration.getAccelX());
         assertEquals(testY, testAcceleration.getAccelY());
     }
-
-    @Test
-    void calcNextAccelTest() {
-        testAcceleration = Acceleration.calcNextAccel(testFlightAngle, testFuel, 0);
-        assertEquals(0, testAcceleration.getAccelX());
-        assertEquals(LaunchPad.GRAVITY, testAcceleration.getAccelY());
-
-        double nextAccelX;
-        double nextAccelY;
-        testFuel = new Fuel(10);
-        double testThrust = 1000;
-        testAcceleration = Acceleration.calcNextAccel(testFlightAngle, testFuel, testThrust);
-        nextAccelX = (testThrust * (Math.cos(testFlightAngle.getAngle()))) /
-                (testFuel.getFuelMass() + LaunchPad.EMPTY_MASS);
-        nextAccelY = ((testThrust * (Math.sin(testFlightAngle.getAngle()))) /
-                (testFuel.getFuelMass() + LaunchPad.EMPTY_MASS)) + LaunchPad.GRAVITY;
-        assertEquals(nextAccelX, testAcceleration.getAccelX());
-        assertEquals(nextAccelY, testAcceleration.getAccelY());
-    }
 }

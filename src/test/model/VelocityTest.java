@@ -20,18 +20,4 @@ public class VelocityTest {
         assertEquals(testX, testVelocity.getVelocityX());
         assertEquals(testY, testVelocity.getVelocityY());
     }
-
-    @Test
-    void calcNextVelocityTest() {
-        double nextVelX;
-        double nextVelY;
-        double testAccelX = 5;
-        double testAccelY = -3;
-        Acceleration testAccel = new Acceleration(testAccelX, testAccelY);
-        nextVelX = testX + (testAccelX / LaunchPad.TICKS_PER_SECOND);
-        nextVelY = testY + (testAccelY / LaunchPad.TICKS_PER_SECOND);
-        testVelocity = Velocity.calcNextVelocity(testVelocity, testAccel);
-        assertEquals(nextVelX, testVelocity.getVelocityX());
-        assertEquals(nextVelY, testVelocity.getVelocityY());
-    }
 }

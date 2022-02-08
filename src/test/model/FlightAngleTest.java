@@ -18,16 +18,6 @@ public class FlightAngleTest {
     void flightAngleTest() {
         assertEquals(testAngle, testFlightAngle.getAngle());
     }
-
-    @Test
-    void calcNextFlightAngleTest() {
-        double testVelX = 3;
-        double testVelY = 5;
-        Velocity testVelocity = new Velocity(testVelX, testVelY);
-        double testAngle = Math.atan(testVelY / testVelX);
-        testFlightAngle = FlightAngle.nextFlightAngle(testVelocity);
-        assertEquals(testAngle, testFlightAngle.getAngle());
-    }
 }
 
 

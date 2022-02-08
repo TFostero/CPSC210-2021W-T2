@@ -13,17 +13,6 @@ public class Velocity {
         this.velocityY = velocityY;
     }
 
-    // EFFECT: calculates next velocity given current velocity and acceleration
-    public static Velocity calcNextVelocity(Velocity velocity, Acceleration accel) {
-        double nextVelX;
-        double nextVelY;
-
-        nextVelX = velocity.getVelocityX() + (accel.getAccelX() / LaunchPad.TICKS_PER_SECOND);
-        nextVelY = velocity.getVelocityY() + (accel.getAccelY() / LaunchPad.TICKS_PER_SECOND);
-
-        return new Velocity(nextVelX, nextVelY);
-    }
-
     public double getVelocityX() {
         return velocityX;
     }

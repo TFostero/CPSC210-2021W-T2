@@ -10,7 +10,6 @@ import java.util.Scanner;
  */
 public class OutputLogging {
     private Scanner scanner;
-    private XYData accel = new AccelTemp(15, 20);
 
     // EFFECT: constructs OutputLogging object with given list of rockets
     //         in order to handle the data output
@@ -40,6 +39,7 @@ public class OutputLogging {
             }
             rocketIndex++;
         }
+        System.exit(0);
 
     }
 
@@ -47,7 +47,6 @@ public class OutputLogging {
     // EFFECT: outputs the defaults rocket flight data including distance flown,
     //         max altitude, max velocity, and total flight time
     private void outputDefaults(ArrayList<Rocket> rockets) {
-        System.out.println(accel.getValX());
         int rocketIndex = 1;
         for (Rocket rocket : rockets) {
             System.out.print("Rocket " + rocketIndex + " flight distance (m): ");

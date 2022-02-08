@@ -28,7 +28,8 @@ public class InputLogging {
 
     // MODIFIES: this
     // EFFECT: prompts user for inputs to initialize the rocket launches
-    //         creates a LaunchPad object using those user inputs
+    //         creates a LaunchPad object and initializes the FlightParameters used for launch,
+    //         tells the LaunchPad to create and launch rockets and then output results
     private void processInitialInputs() {
         while (true) {
             System.out.print("Please enter number of rockets to launch: ");
@@ -47,7 +48,11 @@ public class InputLogging {
                 launchThrusts.add(thrust * 1000);
             }
             scanner.nextLine();
-            new LaunchPad(launchAngles, launchThrusts, launchFuels);
+            LaunchPad pad = new LaunchPad();
+            pad.initLaunchParams(launchAngles, launchThrusts, launchFuels);
+            pad.createRockets();
+            pad.launchRockets();
+            OutputLogging outputs = new OutputLogging(pad.getRockets());
         }
     }
 
