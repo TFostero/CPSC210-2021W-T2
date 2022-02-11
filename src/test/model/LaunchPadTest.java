@@ -131,18 +131,4 @@ public class LaunchPadTest {
         pad.launchRockets();
         assertEquals(tempRockets, pad.getRockets());
     }
-
-    /*
-    // MODIFIES: this
-    // EFFECTS: launches the rockets by continuously calling nextRocket on each
-    //          of the rocket objects as long as the rocket is in bounds
-    public void launchRockets() {
-        for (Rocket rocket : rockets) {
-            while (rocket.inBounds()) {
-                rocket.nextRocket();
-            }
-        }
-    }
-
-     */
 }

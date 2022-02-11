@@ -19,37 +19,3 @@ public class FlightAngleTest {
         assertEquals(testAngle, testFlightAngle.getAngle());
     }
 }
-
-
-/*
-    public static double nextFlightAngle(Velocity velocity) {
-        return Math.atan(velocity.getVelocityY() / velocity.getVelocityX());
-    }
-
-public class FuelTest {
-    private Fuel testFuel;
-    private double testFuelMass = 0;
-
-    @BeforeEach
-    void runBefore() {
-        testFuel = new Fuel(testFuelMass);
-    }
-
-    @Test
-    void FuelTest() {
-        assertEquals(testFuelMass, testFuel.getFuelMass());
-    }
-
-    @Test
-    void calcNextFuelMassTest() {
-        testFuel = Fuel.calcNextFuelMass(testFuelMass);
-        assertEquals(0, testFuel.getFuelMass());
-
-        testFuelMass = 2 * (Rocket.BURN_RATE / Rocket.TICKS_PER_SECOND);
-        double nextFuelMass;
-        testFuel = Fuel.calcNextFuelMass(testFuelMass);
-        nextFuelMass = testFuelMass - (Rocket.BURN_RATE / Rocket.TICKS_PER_SECOND);
-        assertEquals(nextFuelMass, testFuel.getFuelMass());
-    }
-}
- */
