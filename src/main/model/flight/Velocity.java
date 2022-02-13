@@ -1,4 +1,4 @@
-package flight;
+package model.flight;
 
 import static model.LaunchPad.TICKS_PER_SECOND;
 

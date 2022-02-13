@@ -1,11 +1,11 @@
-package flight;
+package model.flight;
 
 import static model.LaunchPad.BURN_RATE_TO_FUEL_RATIO;
 import static model.LaunchPad.TICKS_PER_SECOND;
 
 /*
- * Represents current flight parameters of an object including everything needed
- * to calculate the next state of flight parameters
+ * Represents current model.flight parameters of an object including everything needed
+ * to calculate the next state of model.flight parameters
  */
 public class FlightParams {
     protected Acceleration acceleration;
@@ -48,7 +48,7 @@ public class FlightParams {
     }
 
     // MODIFIES: this
-    // EFFECT: calculates next state of flight parameters based on current parameters
+    // EFFECT: calculates next state of model.flight parameters based on current parameters
     public void calcNext() {
         acceleration.calcNext(angle, fuel, thrust);
         velocity.calcNext(acceleration);
@@ -60,14 +60,14 @@ public class FlightParams {
     }
 
     // MODIFIES: this
-    // EFFECT: calculated next flight angle
-    private void calcNextAngle() {
+    // EFFECT: calculated next model.flight angle
+    public void calcNextAngle() {
         angle = Math.atan(velocity.getValY() / velocity.getValX());
     }
 
     // MODIFIES: this
     // EFFECT: calculates next fuel amount and sets fuel to 0 if fuel is negative
-    private void calcNextFuel() {
+    public void calcNextFuel() {
         double burnRate = calcBurnRate(thrust);
         fuel = fuel - (burnRate / TICKS_PER_SECOND);
         if (fuel < 0) {
@@ -76,21 +76,21 @@ public class FlightParams {
     }
 
     // EFFECT: calculates the burn rate of fuel given the rocket's thrust
-    private double calcBurnRate(double thrust) {
+    public double calcBurnRate(double thrust) {
         return thrust * BURN_RATE_TO_FUEL_RATIO;
     }
 
     // MODIFIES: this
     // EFFECT: calculated the next thrust based on if any fuel is left
-    private void calcNextThrust() {
+    public void calcNextThrust() {
         if (fuel <= 0) {
             thrust = 0;
         }
     }
 
     // MODIFIES: this
-    // EFFECT: calculates the next flight time
-    private void calcNextFlightTime() {
+    // EFFECT: calculates the next model.flight time
+    public void calcNextFlightTime() {
         flightTime = flightTime + 1 / TICKS_PER_SECOND;
     }
 

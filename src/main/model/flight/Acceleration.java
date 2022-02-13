@@ -1,4 +1,4 @@
-package flight;
+package model.flight;
 
 import static model.LaunchPad.EMPTY_MASS;
 import static model.LaunchPad.GRAVITY;

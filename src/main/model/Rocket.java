@@ -1,20 +1,20 @@
 package model;
 
-import flight.*;
+import model.flight.*;
 
 import java.util.ArrayList;
 import java.util.Collections;
 
 /*
- * Represents a rocket including its current flight parameters as well
- * as its flight history
+ * Represents a rocket including its current model.flight parameters as well
+ * as its model.flight history
  */
 public class Rocket {
     private ArrayList<FlightParams> flightHistory;
     private FlightParams flightParams;
 
     // EFFECT: construct a new rocket object with given initial FlightParameters
-    //         logs initial flight parameters into flightHistory
+    //         logs initial model.flight parameters into flightHistory
     public Rocket(FlightParams launchParameters) {
         flightHistory = new ArrayList<>();
         flightParams = launchParameters.cloneFlightParams(); // have to clone otherwise will keep adding same object
@@ -22,14 +22,14 @@ public class Rocket {
     }
 
     // MODIFIES: this
-    // EFFECT: calculates the next position of the rocket and logs the flight data
+    // EFFECT: calculates the next position of the rocket and logs the model.flight data
     public void nextRocket() {
         flightParams.calcNext();
         logFlightData();
     }
 
     // MODIFIES: this
-    // EFFECT: logs the flight data to be output later
+    // EFFECT: logs the model.flight data to be output later
     private void logFlightData() {
         FlightParams param = flightParams.cloneFlightParams();
         flightHistory.add(param);
@@ -64,7 +64,7 @@ public class Rocket {
         return Collections.max(alts);
     }
 
-    public FlightParams getFlightParameters() {
+    public FlightParams getFlightParams() {
         return flightParams;
     }
 

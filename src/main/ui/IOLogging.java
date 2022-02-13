@@ -1,6 +1,6 @@
 package ui;
 
-import flight.*;
+import model.flight.*;
 import model.*;
 
 import java.util.ArrayList;
@@ -52,14 +52,14 @@ public class IOLogging {
 
     // EFFECT: processes the outputs for a given list of rockets
     //         first outputs default values, then checks if the user
-    //         would like to see detailed flight information
+    //         would like to see detailed model.flight information
     private void processOutputs(ArrayList<Rocket> rockets) {
         outputDefaults(rockets);
         String userAnswer = "";
         int rocketIndex = 1;
         for (Rocket rocket : rockets) {
             while (true) {
-                System.out.print("Display all rocket " + rocketIndex + " flight data? (y/n): ");
+                System.out.print("Display all rocket " + rocketIndex + " model.flight data? (y/n): ");
                 userAnswer = scanner.nextLine();
                 System.out.println("You selected " + userAnswer);
                 if (userAnswer.equals("y")) {
@@ -76,13 +76,13 @@ public class IOLogging {
     }
 
 
-    // EFFECT: outputs the defaults rocket flight data including distance flown,
-    //         max altitude, max velocity, and total flight time
+    // EFFECT: outputs the defaults rocket model.flight data including distance flown,
+    //         max altitude, max velocity, and total model.flight time
     private void outputDefaults(ArrayList<Rocket> rockets) {
         int rocketIndex = 1;
         for (Rocket rocket : rockets) {
-            System.out.print("Rocket " + rocketIndex + " flight distance (m): ");
-            System.out.printf("%.2f", rocket.getFlightParameters().getPosition().getValX());
+            System.out.print("Rocket " + rocketIndex + " model.flight distance (m): ");
+            System.out.printf("%.2f", rocket.getFlightParams().getPosition().getValX());
             System.out.println();
             System.out.print("Rocket " + rocketIndex + " maximum altitude (m): ");
             System.out.printf("%.2f", rocket.getMaxAltitude());
@@ -91,13 +91,13 @@ public class IOLogging {
             System.out.printf("%.2f", rocket.getMaxVelocity());
             System.out.println();
             System.out.print("Rocket " + rocketIndex + " flightTime (s): ");
-            System.out.printf("%.2f", rocket.getFlightParameters().getFlightTime());
+            System.out.printf("%.2f", rocket.getFlightParams().getFlightTime());
             System.out.println();
             rocketIndex++;
         }
     }
 
-    // EFFECT: outputs detailed flight data of a given rocket
+    // EFFECT: outputs detailed model.flight data of a given rocket
     private void outputFlightData(Rocket rocket) {
         ArrayList<FlightParams> flightHistory = rocket.getFlightHistory();
         for (FlightParams parameters : flightHistory) {
@@ -138,13 +138,13 @@ public class IOLogging {
         System.out.printf("%.2f", acceleration.getValY());
     }
 
-    // EFFECT: outputs given flight angle in terminal
+    // EFFECT: outputs given model.flight angle in terminal
     private void outputFlightAngle(double flightAngle) {
         System.out.print("  Flight Angle: ");
         System.out.printf("%.2f", radsToDegrees(flightAngle));
     }
 
-    // EFFECT: outputs given flight time in terminal
+    // EFFECT: outputs given model.flight time in terminal
     private void outputFlightTime(double flightTime) {
         System.out.print("  Flight Time: ");
         System.out.printf("%.2f", flightTime);

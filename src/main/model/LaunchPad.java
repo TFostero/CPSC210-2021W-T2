@@ -1,7 +1,7 @@
 package model;
 
 
-import flight.*;
+import model.flight.*;
 
 import java.util.ArrayList;
 

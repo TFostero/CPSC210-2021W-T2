@@ -1,26 +1,26 @@
 package model;
 
-import flight.*;
+import model.flight.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 class RocketTest {
-    /*
+
     private Rocket testRocket;
-    private FlightParameters testParams;
+    private FlightParams testParams;
     private Position testPosition = new Position(0, 1);
     private Velocity testVelocity = new Velocity(2, 3);
     private Acceleration testAcceleration = new Acceleration(4, 5);
-    private FlightAngle testFlightAngle = new FlightAngle(6);
-    private Fuel testFuel = new Fuel(7);
+    private double testFlightAngle = 6.0;
+    private double testFuel = 7.0;
     private double testThrust = 8.0;
     private double testTime = 9.0;
 
     @BeforeEach
     void runBefore() {
-        testParams = new FlightParameters(LaunchPad.STARTING_POSITION,
+        testParams = new FlightParams(LaunchPad.STARTING_POSITION,
                 LaunchPad.STARTING_VELOCITY,
                 LaunchPad.STARTING_ACCELERATION,
                 testFlightAngle,
@@ -28,35 +28,6 @@ class RocketTest {
                 testThrust,
                 LaunchPad.START_TIME);
         testRocket = new Rocket(testParams);
-    }
-
-
-    @Test
-    void calcNextAccelTest() {
-        Acceleration testAccelA = new Acceleration(1, 1);
-        Acceleration testAccelB = new Acceleration(0, LaunchPad.GRAVITY);
-        Fuel testFuel = new Fuel(0);
-
-        testParams = new FlightParameters(LaunchPad.STARTING_POSITION,
-                LaunchPad.STARTING_VELOCITY,
-                testAccelA,
-                testFlightAngle,
-                testFuel,
-                testThrust,
-                LaunchPad.START_TIME);
-
-        testAccelA = testRocket.calcNextAccel(testFlightAngle, testFuel, testThrust);
-        assertEquals(testAccelA.getAccelX(), testAccelB.getAccelX());
-        assertEquals(testAccelA.getAccelY(), testAccelB.getAccelY());
-    }
-
-    @Test
-    void calcNextFuel() {
-        double burnRate = testRocket.calcBurnRate(testThrust);
-        Fuel testFuelB = new Fuel(burnRate / LaunchPad.TICKS_PER_SECOND / 2);
-        testRocket.calcNextFuelMass(testFuelB, testThrust);
-
-        assertEquals(0, testRocket.calcNextFuelMass(testFuelB, testThrust).getFuelMass());
     }
 
     @Test
@@ -70,15 +41,32 @@ class RocketTest {
     }
 
     @Test
-    void getFlightHistoryTest() {
-        FlightParameters testParamsB = testRocket.getFlightHistory().get(0);
+    void getFlightParamsTest() {
+        assertEquals(testParams.getPosition().getValX(), testRocket.getFlightParams().getPosition().getValX());
+        assertEquals(testParams.getPosition().getValY(), testRocket.getFlightParams().getPosition().getValY());
+        assertEquals(testParams.getVelocity().getValX(), testRocket.getFlightParams().getVelocity().getValX());
+        assertEquals(testParams.getVelocity().getValY(), testRocket.getFlightParams().getVelocity().getValY());
+        assertEquals(testParams.getAcceleration().getValX(), testRocket.getFlightParams().getAcceleration().getValX());
+        assertEquals(testParams.getAcceleration().getValY(), testRocket.getFlightParams().getAcceleration().getValY());
+        assertEquals(testParams.getAngle(), testRocket.getFlightParams().getAngle());
+        assertEquals(testParams.getThrust(), testRocket.getFlightParams().getThrust());
+        assertEquals(testParams.getFuel(), testRocket.getFlightParams().getFuel());
+        assertEquals(testParams.getFlightTime(), testRocket.getFlightParams().getFlightTime());
+    }
 
-        assertTrue(testParams.getPosition().equals(testParamsB.getPosition()));
-        assertTrue(testParams.getVelocity().equals(testParamsB.getVelocity()));
-        assertTrue(testParams.getAcceleration().equals(testParamsB.getAcceleration()));
-        assertTrue(testParams.getFlightAngle().equals(testParamsB.getFlightAngle()));
+    @Test
+    void getFlightHistoryTest() {
+        FlightParams testParamsB = testRocket.getFlightHistory().get(0);
+
+        assertEquals(testParams.getPosition().getValX(), testParamsB.getPosition().getValX());
+        assertEquals(testParams.getPosition().getValY(), testParamsB.getPosition().getValY());
+        assertEquals(testParams.getVelocity().getValX(), testParamsB.getVelocity().getValX());
+        assertEquals(testParams.getVelocity().getValY(), testParamsB.getVelocity().getValY());
+        assertEquals(testParams.getAcceleration().getValX(), testParamsB.getAcceleration().getValX());
+        assertEquals(testParams.getAcceleration().getValY(), testParamsB.getAcceleration().getValY());
+        assertEquals(testParams.getAngle(), testParamsB.getAngle());
         assertEquals(testParams.getThrust(), testParamsB.getThrust());
-        assertTrue(testParams.getFuel().equals(testParamsB.getFuel()));
+        assertEquals(testParams.getFuel(), testParamsB.getFuel());
         assertEquals(testParams.getFlightTime(), testParamsB.getFlightTime());
     }
 
@@ -105,7 +93,7 @@ class RocketTest {
     // MODIFIES: this
     // EFFECT: updates test rocket with provided position
     void updateRocketPosition(Position p) {
-        testParams = new FlightParameters(p,
+        testParams = new FlightParams(p,
                 LaunchPad.STARTING_VELOCITY,
                 LaunchPad.STARTING_ACCELERATION,
                 testFlightAngle,
@@ -115,5 +103,4 @@ class RocketTest {
         testRocket = new Rocket(testParams);
     }
 
-     */
 }

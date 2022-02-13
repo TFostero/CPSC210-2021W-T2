@@ -1,4 +1,4 @@
-package flight;
+package model.flight;
 
 /*
  * Represents an object with some x and y data
