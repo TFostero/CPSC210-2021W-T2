@@ -34,23 +34,19 @@ public class IOLogging {
         while (true) {
             System.out.print("Please enter number of rockets to launch: ");
             int rocketLaunches = scanner.nextInt();
+            LaunchPad pad = new LaunchPad();
 
             for (int i = 0; i < rocketLaunches; i++) {
                 System.out.print("Please enter rocket " + (i + 1) + " launch angle (0 - 90 Deg): ");
                 double angle = scanner.nextDouble();
                 angle = degreesToRads(angle);
-                launchAngles.add(new FlightAngle(angle));
                 System.out.print("Please enter rocket " + (i + 1) + " starting fuel (0 - 100 kG): ");
                 double fuel = scanner.nextDouble();
-                launchFuels.add(new Fuel(fuel));
                 System.out.print("Please enter rocket " + (i + 1) + " thrust (0 - 1000 kN): ");
                 double thrust = scanner.nextDouble();
-                launchThrusts.add(thrust * 1000);
+                pad.addRocket(new FlightAngle(angle), thrust * 1000, new Fuel(fuel));
             }
             scanner.nextLine();
-            LaunchPad pad = new LaunchPad();
-            pad.initLaunchParams(launchAngles, launchThrusts, launchFuels);
-            pad.createRockets();
             pad.launchRockets();
             processOutputs(pad.getRockets());
         }

@@ -30,30 +30,17 @@ public class LaunchPad {
     }
 
     // MODIFIES: this
-    // EFFECT: creates first FlightParameters objects to be used for rocket flight
-    public void initLaunchParams(ArrayList<FlightAngle> a, ArrayList<Double> t, ArrayList<Fuel> f) {
-        int numberOfRockets = a.size();
-        for (int i = 0; i < numberOfRockets; i++) {
-            Fuel launchFuel = f.get(i);
-            double launchThrust = t.get(i);
-            FlightAngle launchAngle = a.get(i);
-            launchParameters.add(new FlightParameters(STARTING_POSITION,
-                    STARTING_VELOCITY,
-                    STARTING_ACCELERATION,
-                    launchAngle,
-                    launchFuel,
-                    launchThrust,
-                    START_TIME));
-        }
-    }
-
-    // MODIFIES: this
-    // EFFECT: creates rockets with FlightParameters created in
-    //         initializeLaunchParameters method
-    public void createRockets() {
-        for (FlightParameters params : launchParameters) {
-            rockets.add(new Rocket(params));
-        }
+    // EFFECT: adds rocket to rockets with given initial parameters
+    public void addRocket(FlightAngle initAngle, double initThrust, Fuel initFuel) {
+        FlightParameters flightParams = new FlightParameters(STARTING_POSITION,
+                STARTING_VELOCITY,
+                STARTING_ACCELERATION,
+                initAngle,
+                initFuel,
+                initThrust,
+                START_TIME);
+        Rocket rocket = new Rocket(flightParams);
+        rockets.add(rocket);
     }
 
     // MODIFIES: this

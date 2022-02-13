@@ -41,6 +41,7 @@ public class LaunchPadTest {
         assertTrue(params.isEmpty());
     }
 
+    /*
     @Test
     void initLaunchParamsTest() {
         ArrayList<FlightAngle> testAList = new ArrayList<>();
@@ -101,6 +102,8 @@ public class LaunchPadTest {
         assertEquals(testRocket.getFlightParameters().getFlightTime(), padRocket.getFlightParameters().getFlightTime());
     }
 
+
+
     @Test
     void launchRocketsTest() {
         ArrayList<Rocket> tempRockets = pad.getRockets();
@@ -131,4 +134,6 @@ public class LaunchPadTest {
         pad.launchRockets();
         assertEquals(tempRockets, pad.getRockets());
     }
+
+     */
 }
