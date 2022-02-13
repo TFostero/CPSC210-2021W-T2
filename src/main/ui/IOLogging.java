@@ -1,5 +1,6 @@
 package ui;
 
+import flight.*;
 import model.*;
 
 import java.util.ArrayList;
@@ -13,15 +14,12 @@ import java.util.Scanner;
  */
 public class IOLogging {
     private Scanner scanner;
-    private ArrayList<FlightAngle> launchAngles;
-    private ArrayList<Fuel> launchFuels;
-    private ArrayList<Double> launchThrusts;
 
     // EFFECT: constructs an object that will consume user inputs in the console
     public IOLogging() {
-        launchAngles = new ArrayList<>();
-        launchFuels = new ArrayList<>();
-        launchThrusts = new ArrayList<>();
+        // launchAngles = new ArrayList<>();
+        // launchFuels = new ArrayList<>();
+        // launchThrusts = new ArrayList<>();
         scanner = new Scanner(System.in);
         processIO();
     }
@@ -44,7 +42,7 @@ public class IOLogging {
                 double fuel = scanner.nextDouble();
                 System.out.print("Please enter rocket " + (i + 1) + " thrust (0 - 1000 kN): ");
                 double thrust = scanner.nextDouble();
-                pad.addRocket(new FlightAngle(angle), thrust * 1000, new Fuel(fuel));
+                pad.addRocket(angle, thrust * 1000, fuel);
             }
             scanner.nextLine();
             pad.launchRockets();
@@ -84,7 +82,7 @@ public class IOLogging {
         int rocketIndex = 1;
         for (Rocket rocket : rockets) {
             System.out.print("Rocket " + rocketIndex + " flight distance (m): ");
-            System.out.printf("%.2f", rocket.getFlightParameters().getPosition().getPositionX());
+            System.out.printf("%.2f", rocket.getFlightParameters().getPosition().getValX());
             System.out.println();
             System.out.print("Rocket " + rocketIndex + " maximum altitude (m): ");
             System.out.printf("%.2f", rocket.getMaxAltitude());
@@ -101,49 +99,49 @@ public class IOLogging {
 
     // EFFECT: outputs detailed flight data of a given rocket
     private void outputFlightData(Rocket rocket) {
-        ArrayList<FlightParameters> flightHistory = rocket.getFlightHistory();
-        for (FlightParameters parameters : flightHistory) {
+        ArrayList<FlightParams> flightHistory = rocket.getFlightHistory();
+        for (FlightParams parameters : flightHistory) {
             outputParam(parameters);
         }
     }
 
     // EFFECT: outputs values of given FlightParameters
-    private void outputParam(FlightParameters param) {
+    private void outputParam(FlightParams param) {
         outputPosition(param.getPosition());
         outputVelocity(param.getVelocity());
         outputAcceleration(param.getAcceleration());
-        outputFlightAngle(param.getFlightAngle());
+        outputFlightAngle(param.getAngle());
         outputFlightTime(param.getFlightTime());
     }
 
     // EFFECT: outputs given Position values in terminal
     private void outputPosition(Position p) {
         System.out.print("Position: ");
-        System.out.printf("%.2f", p.getPositionX());
+        System.out.printf("%.2f", p.getValX());
         System.out.print(" ");
-        System.out.printf("%.2f", p.getPositionY());
+        System.out.printf("%.2f", p.getValY());
     }
 
     // EFFECT: outputs given velocity values in terminal
     private void outputVelocity(Velocity velocity) {
         System.out.print("  Velocity: ");
-        System.out.printf("%.2f", velocity.getVelocityX());
+        System.out.printf("%.2f", velocity.getValX());
         System.out.print(" ");
-        System.out.printf("%.2f", velocity.getVelocityY());
+        System.out.printf("%.2f", velocity.getValY());
     }
 
     // EFFECT: outputs given velocity values in terminal
     private void outputAcceleration(Acceleration acceleration) {
         System.out.print("  Acceleration: ");
-        System.out.printf("%.2f", acceleration.getAccelX());
+        System.out.printf("%.2f", acceleration.getValX());
         System.out.print(" ");
-        System.out.printf("%.2f", acceleration.getAccelY());
+        System.out.printf("%.2f", acceleration.getValY());
     }
 
     // EFFECT: outputs given flight angle in terminal
-    private void outputFlightAngle(FlightAngle flightAngle) {
+    private void outputFlightAngle(double flightAngle) {
         System.out.print("  Flight Angle: ");
-        System.out.printf("%.2f", radsToDegrees(flightAngle.getAngle()));
+        System.out.printf("%.2f", radsToDegrees(flightAngle));
     }
 
     // EFFECT: outputs given flight time in terminal

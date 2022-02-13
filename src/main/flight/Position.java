@@ -2,7 +2,11 @@ package flight;
 
 import static model.LaunchPad.TICKS_PER_SECOND;
 
+/*
+ * Represents the position of an object in x and y plane
+ */
 public class Position extends XYData {
+    // EFFECT: constructs a new Position object with given x and y
     public Position(double x, double y) {
         super(x, y);
     }

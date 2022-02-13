@@ -1,5 +1,6 @@
 package model;
 
+import flight.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -10,20 +11,21 @@ import java.util.ArrayList;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class LaunchPadTest {
+    /*
     private LaunchPad pad;
-    private FlightParameters testParams;
+    private FlightParams testParams;
     private Position testPosition = new Position(0, 1);
     private Velocity testVelocity = new Velocity(2, 3);
     private Acceleration testAcceleration = new Acceleration(4, 5);
-    private FlightAngle testFlightAngle = new FlightAngle(6);
-    private Fuel testFuel = new Fuel(7);
+    private double testFlightAngle = 6;
+    private double testFuel = 7;
     private double testThrust = 8.0;
     private double testTime = 9.0;
 
     @BeforeEach
     void runBefore() {
         pad = new LaunchPad();
-        testParams = new FlightParameters(LaunchPad.STARTING_POSITION,
+        testParams = new FlightParams(LaunchPad.STARTING_POSITION,
                 LaunchPad.STARTING_VELOCITY,
                 LaunchPad.STARTING_ACCELERATION,
                 testFlightAngle,

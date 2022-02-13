@@ -1,5 +1,6 @@
 package model;
 
+import flight.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -17,7 +18,7 @@ public class PositionTest {
 
     @Test
     void positionTest() {
-        assertEquals(testX, testPosition.getPositionX());
-        assertEquals(testY, testPosition.getPositionY());
+        assertEquals(testX, testPosition.getValX());
+        assertEquals(testY, testPosition.getValY());
     }
 }

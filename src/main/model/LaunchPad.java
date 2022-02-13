@@ -1,6 +1,8 @@
 package model;
 
 
+import flight.*;
+
 import java.util.ArrayList;
 
 /*
@@ -9,7 +11,6 @@ import java.util.ArrayList;
  */
 public class LaunchPad {
     private ArrayList<Rocket> rockets;
-    private ArrayList<FlightParameters> launchParameters;
     public static final Position STARTING_POSITION = new Position(0, 0);
     public static final Velocity STARTING_VELOCITY = new Velocity(0,0);
     public static final Acceleration STARTING_ACCELERATION = new Acceleration(0,0);
@@ -21,18 +22,15 @@ public class LaunchPad {
     public static final double HEIGHT_LIMIT = 500000;
     public static final double START_TIME = 0;
 
-    // EFFECT: constructs a launch pad with given inputs
-    //         creates and launches rockets and then creates
-    //         a OutputLogging object to output the results
+    // EFFECT: constructs a launch pad with empty list of rockets to be launched
     public LaunchPad() {
-        launchParameters = new ArrayList<>();
         rockets = new ArrayList<>();
     }
 
     // MODIFIES: this
-    // EFFECT: adds rocket to rockets with given initial parameters
-    public void addRocket(FlightAngle initAngle, double initThrust, Fuel initFuel) {
-        FlightParameters flightParams = new FlightParameters(STARTING_POSITION,
+    // EFFECT: adds rocket to list of rocket with given initial parameters
+    public void addRocket(double initAngle, double initThrust, double initFuel) {
+        FlightParams flightParams = new FlightParams(STARTING_POSITION,
                 STARTING_VELOCITY,
                 STARTING_ACCELERATION,
                 initAngle,
@@ -56,9 +54,5 @@ public class LaunchPad {
 
     public ArrayList<Rocket> getRockets() {
         return rockets;
-    }
-
-    public ArrayList<FlightParameters> getLaunchParameters() {
-        return launchParameters;
     }
 }

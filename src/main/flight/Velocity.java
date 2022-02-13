@@ -2,7 +2,11 @@ package flight;
 
 import static model.LaunchPad.TICKS_PER_SECOND;
 
+/*
+ * Represents the velocity of an object in x and y plane
+ */
 public class Velocity extends XYData {
+    // EFFECT: constructs a new Velocity object with given x and y
     public Velocity(double x, double y) {
         super(x, y);
     }

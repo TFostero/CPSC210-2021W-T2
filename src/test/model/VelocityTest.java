@@ -1,5 +1,6 @@
 package model;
 
+import flight.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -17,7 +18,7 @@ public class VelocityTest {
 
     @Test
     void velocityTest() {
-        assertEquals(testX, testVelocity.getVelocityX());
-        assertEquals(testY, testVelocity.getVelocityY());
+        assertEquals(testX, testVelocity.getValX());
+        assertEquals(testY, testVelocity.getValY());
     }
 }

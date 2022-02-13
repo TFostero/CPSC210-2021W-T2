@@ -3,7 +3,11 @@ package flight;
 import static model.LaunchPad.EMPTY_MASS;
 import static model.LaunchPad.GRAVITY;
 
+/*
+ * Represents the acceleration of an object in x and y plane
+ */
 public class Acceleration extends XYData {
+    // EFFECT: constructs a new acceleration object with given x and y
     public Acceleration(double x, double y) {
         super(x, y);
     }
