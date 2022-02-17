@@ -33,22 +33,8 @@ public class FlightParams {
         this.flightTime = flightTime;
     }
 
-    // EFFECT: clones a new FlightParams object
-    public FlightParams cloneFlightParams() {
-        Position clonePos = new Position(position.valX, position.valY);
-        Velocity cloneVel = new Velocity((velocity.valX), velocity.valY);
-        Acceleration cloneAccel = new Acceleration(acceleration.getValX(), acceleration.getValY());
-        return new FlightParams(clonePos,
-                                cloneVel,
-                                cloneAccel,
-                                angle,
-                                fuel,
-                                thrust,
-                                flightTime);
-    }
-
     // MODIFIES: this
-    // EFFECT: calculates next state of model.flight parameters based on current parameters
+    // EFFECT: calculates next state of flight parameters based on current parameters
     public void calcNext() {
         acceleration.calcNext(angle, fuel, thrust);
         velocity.calcNext(acceleration);
@@ -60,7 +46,7 @@ public class FlightParams {
     }
 
     // MODIFIES: this
-    // EFFECT: calculated next model.flight angle
+    // EFFECT: calculated next flight angle
     public void calcNextAngle() {
         angle = Math.atan(velocity.getValY() / velocity.getValX());
     }
@@ -81,7 +67,7 @@ public class FlightParams {
     }
 
     // MODIFIES: this
-    // EFFECT: calculated the next thrust based on if any fuel is left
+    // EFFECT: calculates the next thrust based on if any fuel is left
     public void calcNextThrust() {
         if (fuel <= 0) {
             thrust = 0;
@@ -92,6 +78,20 @@ public class FlightParams {
     // EFFECT: calculates the next model.flight time
     public void calcNextFlightTime() {
         flightTime = flightTime + 1 / TICKS_PER_SECOND;
+    }
+
+    // EFFECT: clones a new FlightParams object and returns it
+    public FlightParams cloneFlightParams() {
+        Position clonePos = new Position(position.valX, position.valY);
+        Velocity cloneVel = new Velocity((velocity.valX), velocity.valY);
+        Acceleration cloneAccel = new Acceleration(acceleration.getValX(), acceleration.getValY());
+        return new FlightParams(clonePos,
+                cloneVel,
+                cloneAccel,
+                angle,
+                fuel,
+                thrust,
+                flightTime);
     }
 
     public Acceleration getAcceleration() {

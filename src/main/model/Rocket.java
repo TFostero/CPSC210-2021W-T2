@@ -1,6 +1,8 @@
 package model;
 
 import model.flight.*;
+import org.json.JSONArray;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -12,24 +14,30 @@ import java.util.Collections;
 public class Rocket {
     private ArrayList<FlightParams> flightHistory;
     private FlightParams flightParams;
+    private String name;
+    private boolean launchFlag;
 
-    // EFFECT: construct a new rocket object with given initial FlightParameters
-    //         logs initial model.flight parameters into flightHistory
-    public Rocket(FlightParams launchParameters) {
+    // EFFECT: construct a new rocket object with given initial FlightParams
+    //         logs initial flight parameters into flightHistory
+    public Rocket(FlightParams launchParameters, String name) {
+        this.name = name;
+        launchFlag = false;
         flightHistory = new ArrayList<>();
         flightParams = launchParameters.cloneFlightParams(); // have to clone otherwise will keep adding same object
         logFlightData();
     }
 
     // MODIFIES: this
-    // EFFECT: calculates the next position of the rocket and logs the model.flight data
+    // EFFECT: calculates the next position of the rocket and logs the flight data
+    //         and sets launch flag to true
     public void nextRocket() {
+        launchFlag = true;
         flightParams.calcNext();
         logFlightData();
     }
 
     // MODIFIES: this
-    // EFFECT: logs the model.flight data to be output later
+    // EFFECT: logs the flight data to be output later
     private void logFlightData() {
         FlightParams param = flightParams.cloneFlightParams();
         flightHistory.add(param);
@@ -64,12 +72,29 @@ public class Rocket {
         return Collections.max(alts);
     }
 
+    public JSONObject toJson() {
+        JSONObject json = new JSONObject();
+        json.put("name", name);
+        json.put("angle", flightParams.getAngle());
+        json.put("fuel", flightParams.getFuel());
+        json.put("thrust", flightParams.getThrust());
+        return json;
+    }
+
     public FlightParams getFlightParams() {
         return flightParams;
     }
 
     public ArrayList<FlightParams> getFlightHistory() {
         return flightHistory;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public boolean getLaunchFlag() {
+        return launchFlag;
     }
 
 }

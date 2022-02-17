@@ -19,6 +19,7 @@ public class LaunchPadTest {
     private double testFuel = 7;
     private double testThrust = 8.0;
     private double testTime = 9.0;
+    private String name;
 
     @BeforeEach
     void runBefore() {
@@ -30,6 +31,7 @@ public class LaunchPadTest {
                 testFuel,
                 testThrust,
                 LaunchPad.START_TIME);
+        name = "Test Rocket";
     }
 
 
@@ -53,13 +55,14 @@ public class LaunchPadTest {
                 testThrust,
                 LaunchPad.START_TIME);
 
-        Rocket testRocket = new Rocket(testParams);
+        Rocket testRocket = new Rocket(testParams, name);
         ArrayList<Rocket> testRockets = new ArrayList<>();
         testRockets.add(testRocket);
-        pad.addRocket(testFlightAngle, testThrust, testFuel);
+        pad.addRocket(testFlightAngle, testThrust, testFuel, name);
         tempRockets = pad.getRockets();
         pad.launchRockets();
         assertEquals(tempRockets, pad.getRockets());
+        assertTrue(pad.getRockets().get(0).getLaunchFlag());
     }
 
 

@@ -2,6 +2,8 @@ package model;
 
 
 import model.flight.*;
+import org.json.JSONArray;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 
@@ -21,6 +23,7 @@ public class LaunchPad {
     public static final double GRAVITY = -9.81;
     public static final double HEIGHT_LIMIT = 500000;
     public static final double START_TIME = 0;
+    public static final double KN_TO_N = 1000;
 
     // EFFECT: constructs a launch pad with empty list of rockets to be launched
     public LaunchPad() {
@@ -29,15 +32,15 @@ public class LaunchPad {
 
     // MODIFIES: this
     // EFFECT: adds rocket to list of rocket with given initial parameters
-    public void addRocket(double initAngle, double initThrust, double initFuel) {
+    public void addRocket(double launchAngle, double launchThrust, double launchFuel, String name) {
         FlightParams flightParams = new FlightParams(STARTING_POSITION,
                 STARTING_VELOCITY,
                 STARTING_ACCELERATION,
-                initAngle,
-                initFuel,
-                initThrust,
+                launchAngle,
+                launchFuel,
+                launchThrust,
                 START_TIME);
-        Rocket rocket = new Rocket(flightParams);
+        Rocket rocket = new Rocket(flightParams, name);
         rockets.add(rocket);
     }
 
@@ -50,6 +53,22 @@ public class LaunchPad {
                 rocket.nextRocket();
             }
         }
+    }
+
+    public JSONObject toJson() {
+        JSONObject json = new JSONObject();
+        json.put("launch params", paramsToJson());
+        return json;
+    }
+
+    public JSONArray paramsToJson() {
+        JSONArray jsonArray = new JSONArray();
+
+        for (Rocket r : rockets) {
+            jsonArray.put(r.toJson());
+        }
+
+        return jsonArray;
     }
 
     public ArrayList<Rocket> getRockets() {

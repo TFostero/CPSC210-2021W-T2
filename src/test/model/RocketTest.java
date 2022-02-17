@@ -17,6 +17,7 @@ class RocketTest {
     private double testFuel = 7.0;
     private double testThrust = 8.0;
     private double testTime = 9.0;
+    private String name;
 
     @BeforeEach
     void runBefore() {
@@ -27,7 +28,8 @@ class RocketTest {
                 testFuel,
                 testThrust,
                 LaunchPad.START_TIME);
-        testRocket = new Rocket(testParams);
+        name = "Test Rocket";
+        testRocket = new Rocket(testParams, name);
     }
 
     @Test
@@ -52,6 +54,7 @@ class RocketTest {
         assertEquals(testParams.getThrust(), testRocket.getFlightParams().getThrust());
         assertEquals(testParams.getFuel(), testRocket.getFlightParams().getFuel());
         assertEquals(testParams.getFlightTime(), testRocket.getFlightParams().getFlightTime());
+        assertEquals(name, testRocket.getName());
     }
 
     @Test
@@ -100,7 +103,7 @@ class RocketTest {
                 testFuel,
                 testThrust,
                 LaunchPad.START_TIME);
-        testRocket = new Rocket(testParams);
+        testRocket = new Rocket(testParams, name);
     }
 
 }
