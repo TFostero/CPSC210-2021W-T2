@@ -1,6 +1,7 @@
 package model;
 
 import model.flight.*;
+import org.json.JSONObject;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -105,5 +106,20 @@ class RocketTest {
                 LaunchPad.START_TIME);
         testRocket = new Rocket(testParams, name);
     }
+
+    @Test
+    void launchParamsToJsonTest() {
+        JSONObject testJsonA = new JSONObject();
+        testJsonA.put("name", name);
+        testJsonA.put("angle", testParams.getAngle());
+        testJsonA.put("fuel", testParams.getFuel());
+        testJsonA.put("thrust", testParams.getThrust());
+        JSONObject testJsonB = testRocket.launchParamsToJson();
+        assertEquals(testJsonA.get("name"), testJsonB.get("name"));
+        assertEquals(testJsonA.get("angle"), testJsonB.get("angle"));
+        assertEquals(testJsonA.get("fuel"), testJsonB.get("fuel"));
+        assertEquals(testJsonA.get("thrust"), testJsonB.get("thrust"));
+    }
+
 
 }

@@ -72,7 +72,8 @@ public class Rocket {
         return Collections.max(alts);
     }
 
-    public JSONObject toJson() {
+    // EFFECT: takes launch parameters and converts them into a JSON object
+    public JSONObject launchParamsToJson() {
         JSONObject json = new JSONObject();
         json.put("name", name);
         json.put("angle", flightParams.getAngle());

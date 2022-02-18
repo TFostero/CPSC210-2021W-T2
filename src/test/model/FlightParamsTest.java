@@ -64,7 +64,7 @@ public class FlightParamsTest {
     @Test
     void calcNextTest() {
         Acceleration expectedAccel = new Acceleration(testAccelX, testAccelY);
-        expectedAccel.calcNext(testFlightAngle, testFuel, testThrust);
+        expectedAccel.calcNext(testFlightAngle, testFuel, testThrust, testPosY, testVelocity);
         Velocity expectedVel = new Velocity(testVelX, testVelY);
         expectedVel.calcNext(expectedAccel);
         Position expectedPos = new Position(testPosX, testPosY);
@@ -78,17 +78,6 @@ public class FlightParamsTest {
         assertEquals(expectedPos.getValY(), testParams.getPosition().getValY());
     }
 
-    /*
-    public void calcNext() {
-        acceleration.calcNext(angle, fuel, thrust);
-        velocity.calcNext(acceleration);
-        position.calcNext(velocity);
-        calcNextAngle();
-        calcNextFuel();
-        calcNextThrust();
-        calcNextFlightTime();
-    }
-     */
 
     @Test
     void calcNextAngleTest() {
@@ -143,3 +132,4 @@ public class FlightParamsTest {
     }
 
 }
+

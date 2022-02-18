@@ -36,7 +36,7 @@ public class FlightParams {
     // MODIFIES: this
     // EFFECT: calculates next state of flight parameters based on current parameters
     public void calcNext() {
-        acceleration.calcNext(angle, fuel, thrust);
+        acceleration.calcNext(angle, fuel, thrust, position.getValY(), velocity);
         velocity.calcNext(acceleration);
         position.calcNext(velocity);
         calcNextAngle();

@@ -1,6 +1,8 @@
 package model;
 
 import model.flight.*;
+import org.json.JSONArray;
+import org.json.JSONObject;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -65,5 +67,25 @@ public class LaunchPadTest {
         assertTrue(pad.getRockets().get(0).getLaunchFlag());
     }
 
+    // also tests paramsToJson method
+    @Test
+    void rocketLaunchParamsToJsonTest() {
+        pad.addRocket(testFlightAngle, testThrust, testFuel, name);
+        pad.addRocket(testFlightAngle + 1, testThrust + 1, testFuel + 1, "Test 2");
+        JSONObject testJsonA = new JSONObject();
+        testJsonA.put("launch params", pad.paramsToJson());
+        JSONObject testJsonB = pad.rocketLaunchParamsToJson();
+        JSONArray testArrayA = testJsonA.getJSONArray("launch params");
+        JSONArray testArrayB = testJsonB.getJSONArray("launch params");
 
+        for (int i = 0; i < testArrayA.length(); i++) {
+            JSONObject jsonA = testArrayA.getJSONObject(i);
+            JSONObject jsonB = testArrayB.getJSONObject(i);
+            assertEquals(jsonA.get("name"), jsonB.get("name"));
+            assertEquals(jsonA.get("angle"), jsonB.get("angle"));
+            assertEquals(jsonA.get("fuel"), jsonB.get("fuel"));
+            assertEquals(jsonA.get("thrust"), jsonB.get("thrust"));
+            i++;
+        }
+    }
 }

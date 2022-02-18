@@ -37,7 +37,7 @@ public class JsonReader {
         return contentBuilder.toString();
     }
 
-    // EFFECTS: parses workroom from JSON object and returns it
+    // EFFECTS: parses launch pad from JSON object and returns it
     private LaunchPad parseLaunchPad(JSONObject jsonObject) {
         LaunchPad pad = new LaunchPad();
         addRockets(pad, jsonObject);

@@ -24,6 +24,9 @@ public class LaunchPad {
     public static final double HEIGHT_LIMIT = 500000;
     public static final double START_TIME = 0;
     public static final double KN_TO_N = 1000;
+    public static final double ROCKET_RADIUS = 0.122;
+    public static final double ROCKET_AREA = Math.PI * Math.pow(ROCKET_RADIUS, 2);
+    public static final double DRAG_COEFFICIENT = 0.4;
 
     // EFFECT: constructs a launch pad with empty list of rockets to be launched
     public LaunchPad() {
@@ -55,17 +58,19 @@ public class LaunchPad {
         }
     }
 
-    public JSONObject toJson() {
+    // EFFECT: converts all rockets launch parameters into a JSON object
+    public JSONObject rocketLaunchParamsToJson() {
         JSONObject json = new JSONObject();
         json.put("launch params", paramsToJson());
         return json;
     }
 
+    // EFFECT: converts a single rocket's launch params into a JSON array
     public JSONArray paramsToJson() {
         JSONArray jsonArray = new JSONArray();
 
         for (Rocket r : rockets) {
-            jsonArray.put(r.toJson());
+            jsonArray.put(r.launchParamsToJson());
         }
 
         return jsonArray;
