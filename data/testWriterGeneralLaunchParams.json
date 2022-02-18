@@ -1,0 +1,14 @@
+{"launch params": [
+    {
+        "fuel": 3,
+        "name": "Rocket A Test",
+        "angle": 1,
+        "thrust": 5
+    },
+    {
+        "fuel": 4,
+        "name": "Rocket B Test",
+        "angle": 2,
+        "thrust": 6
+    }
+]}

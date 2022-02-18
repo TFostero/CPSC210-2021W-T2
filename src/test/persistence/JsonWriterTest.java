@@ -61,12 +61,12 @@ class JsonWriterTest extends JsonRocketTest {
             LaunchPad pad = new LaunchPad();
             pad.addRocket(launchAngleA, launchThrustA, launchFuelA, testNameA);
             pad.addRocket(launchAngleB, launchThrustB, launchFuelB, testNameB);
-            JsonWriter writer = new JsonWriter("./data/testWriterGeneralWorkroom.json");
+            JsonWriter writer = new JsonWriter("./data/testWriterGeneralLaunchParams.json");
             writer.open();
             writer.write(pad);
             writer.close();
 
-            JsonReader reader = new JsonReader("./data/testWriterGeneralWorkroom.json");
+            JsonReader reader = new JsonReader("./data/testWriterGeneralLaunchParams.json");
             pad = reader.read();
             List<Rocket> rockets = pad.getRockets();
             assertEquals(2, rockets.size());

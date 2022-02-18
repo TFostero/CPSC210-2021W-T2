@@ -103,12 +103,12 @@ public class RocketLauncherApp {
         for (Rocket rocket : pad.getRockets()) {
             FlightParams launchParams = rocket.getFlightHistory().get(0);
             System.out.print("\nRocket name: " + rocket.getName());
-            System.out.print("  Launch angle: ");
+            System.out.print("  Launch angle (Deg): ");
             System.out.printf("%.2f", radsToDegrees(launchParams.getAngle()));
-            System.out.print("  Launch fuel: ");
+            System.out.print("  Launch fuel (kG): ");
             System.out.printf("%.2f", launchParams.getFuel());
-            System.out.print("  Launch thrust: ");
-            System.out.printf("%.2f", launchParams.getThrust());
+            System.out.print("  Launch thrust (kN): ");
+            System.out.printf("%.2f", launchParams.getThrust() / KN_TO_N);
             System.out.println();
         }
     }
