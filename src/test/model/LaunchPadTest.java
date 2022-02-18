@@ -21,7 +21,7 @@ public class LaunchPadTest {
     private double testFuel = 7;
     private double testThrust = 8.0;
     private double testTime = 9.0;
-    private String name;
+    private String testName;
 
     @BeforeEach
     void runBefore() {
@@ -33,7 +33,7 @@ public class LaunchPadTest {
                 testFuel,
                 testThrust,
                 LaunchPad.START_TIME);
-        name = "Test Rocket";
+        testName = "Test Rocket";
     }
 
 
@@ -57,10 +57,10 @@ public class LaunchPadTest {
                 testThrust,
                 LaunchPad.START_TIME);
 
-        Rocket testRocket = new Rocket(testParams, name);
+        Rocket testRocket = new Rocket(testParams, testName);
         ArrayList<Rocket> testRockets = new ArrayList<>();
         testRockets.add(testRocket);
-        pad.addRocket(testFlightAngle, testThrust, testFuel, name);
+        pad.addRocket(testFlightAngle, testThrust, testFuel, testName);
         tempRockets = pad.getRockets();
         pad.launchRockets();
         assertEquals(tempRockets, pad.getRockets());
@@ -70,7 +70,7 @@ public class LaunchPadTest {
     // also tests paramsToJson method
     @Test
     void rocketLaunchParamsToJsonTest() {
-        pad.addRocket(testFlightAngle, testThrust, testFuel, name);
+        pad.addRocket(testFlightAngle, testThrust, testFuel, testName);
         pad.addRocket(testFlightAngle + 1, testThrust + 1, testFuel + 1, "Test 2");
         JSONObject testJsonA = new JSONObject();
         testJsonA.put("launch params", pad.paramsToJson());
