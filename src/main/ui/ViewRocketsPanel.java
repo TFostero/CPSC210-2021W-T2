@@ -1,6 +1,5 @@
 package ui;
 
-import model.LaunchGame;
 import model.LaunchPad;
 import model.Rocket;
 
@@ -31,7 +30,7 @@ public class ViewRocketsPanel extends JPanel implements ChangeListener {
         pad = ui.getLaunchPad();
         rocketDisplay = new JPanel();
         buttons = new JPanel();
-        setSize(LaunchGame.WIDTH, LaunchGame.HEIGHT);
+        setSize(LaunchPad.WIDTH, LaunchPad.HEIGHT);
         BorderLayout bl = new BorderLayout();
         setLayout(bl);
         buttons.add(new JButton(new SaveAction()));

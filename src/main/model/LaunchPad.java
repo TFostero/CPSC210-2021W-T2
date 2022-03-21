@@ -29,6 +29,8 @@ public class LaunchPad {
     public static final double ROCKET_RADIUS = 0.122;
     public static final double ROCKET_AREA = Math.PI * Math.pow(ROCKET_RADIUS, 2);
     public static final double DRAG_COEFFICIENT = 0.4;
+    public static final int WIDTH = 1000;
+    public static final int HEIGHT = 600;
 
     // EFFECT: constructs a launch pad with empty list of rockets to be launched
     public LaunchPad() {

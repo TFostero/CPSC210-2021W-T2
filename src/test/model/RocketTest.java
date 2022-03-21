@@ -121,5 +121,11 @@ class RocketTest {
         assertEquals(testJsonA.get("thrust"), testJsonB.get("thrust"));
     }
 
+    @Test
+    void setRocketLaunchFlagTest() {
+        assertFalse(testRocket.getRocketLaunchedFlag());
+        testRocket.setRocketLaunchedFlag(true);
+        assertTrue(testRocket.getRocketLaunchedFlag());
+    }
 
 }

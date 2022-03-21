@@ -1,6 +1,5 @@
 package ui;
 
-import model.LaunchGame;
 import model.LaunchPad;
 import model.Rocket;
 import persistence.JsonReader;
@@ -43,7 +42,7 @@ public class RocketLauncherUI extends JFrame {
         tabbedPane.addTab("Launch Rockets", launcherPanel);
         tabbedPane.addChangeListener(viewRocketsPanel);
         add(tabbedPane);
-        setPreferredSize(new Dimension(LaunchGame.WIDTH, LaunchGame.HEIGHT));
+        setPreferredSize(Toolkit.getDefaultToolkit().getScreenSize());
         pack();
         centreOnScreen();
         setVisible(true);
@@ -103,5 +102,9 @@ public class RocketLauncherUI extends JFrame {
 
     public LaunchPad getLaunchPad() {
         return pad;
+    }
+
+    public static void main(String[] args) {
+        new RocketLauncherUI();
     }
 }
