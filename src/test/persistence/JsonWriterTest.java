@@ -2,11 +2,6 @@ package persistence;
 
 import model.LaunchPad;
 import model.Rocket;
-import model.flight.Acceleration;
-import model.flight.FlightParams;
-import model.flight.Position;
-import model.flight.Velocity;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.io.IOException;

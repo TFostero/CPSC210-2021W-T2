@@ -1,37 +1,37 @@
 package model;
 
 import model.flight.*;
-import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.Collections;
 
 /*
- * Represents a rocket including its current model.flight parameters as well
- * as its model.flight history
+ * Represents a rocket including its current flight parameters as well
+ * as its flight history
  */
 public class Rocket {
     private ArrayList<FlightParams> flightHistory;
     private FlightParams flightParams;
     private String name;
-    private boolean launchFlag;
+
+    private boolean rocketLaunchedFlag;
 
     // EFFECT: construct a new rocket object with given initial FlightParams
     //         logs initial flight parameters into flightHistory
     public Rocket(FlightParams launchParameters, String name) {
         this.name = name;
-        launchFlag = false;
+        rocketLaunchedFlag = false;
         flightHistory = new ArrayList<>();
-        flightParams = launchParameters.cloneFlightParams(); // have to clone otherwise will keep adding same object
-        logFlightData();
+        flightParams = launchParameters.cloneFlightParams(); // have to clone because we want a new flight parameters
+        logFlightData();                                     // object to use
     }
 
     // MODIFIES: this
     // EFFECT: calculates the next position of the rocket and logs the flight data
     //         and sets launch flag to true
     public void nextRocket() {
-        launchFlag = true;
+        rocketLaunchedFlag = true;
         flightParams.calcNext();
         logFlightData();
     }
@@ -94,8 +94,12 @@ public class Rocket {
         return name;
     }
 
-    public boolean getLaunchFlag() {
-        return launchFlag;
+    public boolean getRocketLaunchedFlag() {
+        return rocketLaunchedFlag;
+    }
+
+    public void setRocketLaunchedFlag(boolean rocketLaunchedFlag) {
+        this.rocketLaunchedFlag = rocketLaunchedFlag;
     }
 
 }

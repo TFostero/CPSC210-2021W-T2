@@ -64,7 +64,7 @@ public class LaunchPadTest {
         tempRockets = pad.getRockets();
         pad.launchRockets();
         assertEquals(tempRockets, pad.getRockets());
-        assertTrue(pad.getRockets().get(0).getLaunchFlag());
+        assertTrue(pad.getRockets().get(0).getRocketLaunchedFlag());
     }
 
     // also tests paramsToJson method
