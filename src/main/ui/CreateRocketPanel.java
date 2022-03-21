@@ -1,6 +1,5 @@
 package ui;
 
-import model.LaunchGame;
 import model.LaunchPad;
 
 import javax.swing.*;
@@ -9,6 +8,9 @@ import java.awt.event.ActionEvent;
 
 import static model.LaunchPad.KN_TO_N;
 
+/*
+ * Represents panel where new rockets can be created from
+ */
 public class CreateRocketPanel extends JPanel {
     private JTextField nameField;
     private JTextField angleField;
@@ -17,6 +19,7 @@ public class CreateRocketPanel extends JPanel {
     private RocketLauncherUI ui;
     private LaunchPad pad;
 
+    // EFFECT: creates new create rocket panel with fields for name, angle, thrust, and fuel
     public CreateRocketPanel(RocketLauncherUI ui) {
         this.ui = ui;
         this.pad = ui.getLaunchPad();
@@ -28,6 +31,7 @@ public class CreateRocketPanel extends JPanel {
     }
 
 
+    // EFFECT: adds create rocket button and fields for entry to panel
     private void addButtonAndFields() {
         JPanel fields = new JPanel();
         GridLayout gridLayout = new GridLayout(0, 2);
@@ -52,6 +56,8 @@ public class CreateRocketPanel extends JPanel {
             super("Add Rocket");
         }
 
+        // MODIFIES: this
+        // EFFECT: adds a rocket to pad depending on data entered into fields when button is pressed
         @Override
         public void actionPerformed(ActionEvent evt) {
             String name = nameField.getText();

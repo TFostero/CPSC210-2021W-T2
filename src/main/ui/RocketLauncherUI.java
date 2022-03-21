@@ -13,27 +13,27 @@ import java.awt.event.ActionListener;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
+/*
+ * Represents the class JFrame that holds all the tab panels
+ */
 public class RocketLauncherUI extends JFrame {
-    private static final int INTERVAL = 500;
+    private static final int INTERVAL = 10;
     private LauncherPanel launcherPanel;
     private CreateRocketPanel createRocketPanel;
     private ViewRocketsPanel viewRocketsPanel;
-    private CardLayout cl;
     private LaunchPad pad;
     private JsonWriter jsonWriter;
     private JsonReader jsonReader;
     private static final String JSON_STORE = "./data/launchParams.json";
 
+    // EFFECT: Creates rocket launcher UI frame with a create rocket tab, a view rockets tab, and a launch rocket tab
     public RocketLauncherUI() {
         super("Rocker Launcher");
         pad = new LaunchPad();
         jsonWriter = new JsonWriter(JSON_STORE);
         jsonReader = new JsonReader(JSON_STORE);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        // cl = new CardLayout();
-        // setLayout(cl);
         setUndecorated(false);
-        setResizable(false);
         JTabbedPane tabbedPane = new JTabbedPane();
         createRocketPanel = new CreateRocketPanel(this);
         viewRocketsPanel = new ViewRocketsPanel(this);
@@ -43,39 +43,33 @@ public class RocketLauncherUI extends JFrame {
         tabbedPane.addTab("Launch Rockets", launcherPanel);
         tabbedPane.addChangeListener(viewRocketsPanel);
         add(tabbedPane);
-        setSize(new Dimension(LaunchGame.WIDTH, LaunchGame.HEIGHT));
+        setPreferredSize(new Dimension(LaunchGame.WIDTH, LaunchGame.HEIGHT));
+        pack();
         centreOnScreen();
         setVisible(true);
         addTimer();
     }
 
-    public LaunchPad getLaunchPad() {
-        return pad;
-    }
-
-    // Set up timer
-    // modifies: none
-    // effects:  initializes a timer that updates game each
-    //           INTERVAL milliseconds
+    // EFFECT:  initializes a timer that updates rockets each
+    //          INTERVAL milliseconds if rockets are launched
+    //          and still in bounds
     private void addTimer() {
         Timer t = new Timer(INTERVAL, new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent ae) {
-                System.out.println("test");
                 for (Rocket r : pad.getRockets()) {
                     if (r.getRocketLaunchedFlag()) {
-                        r.nextRocket();
+                        if (r.inBounds()) {
+                            r.nextRocket();
+                        }
                     }
-                    System.out.println(r.getName());
-                    System.out.println(r.getFlightParams().getAngle());
-                    System.out.println(r.getFlightParams().getPosition().getValY());
+                    launcherPanel.getGamePanel().repaint();
                 }
             }
         });
         t.start();
     }
 
-    // Centres frame on desktop
     // MODIFIES: this
     // EFFECTS:  location of frame is set so frame is centred on desktop
     private void centreOnScreen() {
@@ -107,4 +101,7 @@ public class RocketLauncherUI extends JFrame {
         }
     }
 
+    public LaunchPad getLaunchPad() {
+        return pad;
+    }
 }

@@ -11,6 +11,8 @@ import java.util.Collections;
  * as its flight history
  */
 public class Rocket {
+    public static final int SIZE = 10;
+    public static final int FlAME_SIZE = 5;
     private ArrayList<FlightParams> flightHistory;
     private FlightParams flightParams;
     private String name;
@@ -76,9 +78,9 @@ public class Rocket {
     public JSONObject launchParamsToJson() {
         JSONObject json = new JSONObject();
         json.put("name", name);
-        json.put("angle", flightParams.getAngle());
-        json.put("fuel", flightParams.getFuel());
-        json.put("thrust", flightParams.getThrust());
+        json.put("angle", flightHistory.get(0).getAngle());
+        json.put("fuel", flightHistory.get(0).getFuel());
+        json.put("thrust", flightHistory.get(0).getThrust());
         return json;
     }
 
