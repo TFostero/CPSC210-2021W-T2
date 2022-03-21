@@ -26,10 +26,10 @@ public class CreateRocketPanel extends JPanel {
     public CreateRocketPanel(RocketLauncherUI ui) {
         this.ui = ui;
         this.pad = ui.getLaunchPad();
-        nameField = new JTextField(15);
-        angleField = new JTextField(15);
-        thrustField = new JTextField(15);
-        fuelField = new JTextField(15);
+        nameField = new JTextField("Name", 15);
+        angleField = new JTextField("45", 15);
+        thrustField = new JTextField("15",15);
+        fuelField = new JTextField("40", 15);
         addButtonAndFields();
     }
 

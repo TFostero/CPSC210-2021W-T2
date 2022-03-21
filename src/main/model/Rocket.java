@@ -11,8 +11,8 @@ import java.util.Collections;
  * as its flight history
  */
 public class Rocket {
-    public static final int SIZE = 10;
-    public static final int FLAME_SIZE = 4;
+    public static final int SIZE = 8;
+    public static final int FLAME_SIZE = 8;
     private ArrayList<FlightParams> flightHistory;
     private FlightParams flightParams;
     private String name;

@@ -67,22 +67,26 @@ public class GamePanel extends JPanel {
         int ypos = rocketYtoScreenY(r.getFlightParams());
         Color savedCol = g.getColor();
         g.setColor(Color.BLACK);
-        g.fillRect(xpos, ypos, SIZE, SIZE);
         drawFlightPath(g, r);
+        g.fillRect(xpos, ypos, SIZE, SIZE);
         g.setColor(Color.YELLOW);
         if (r.getFlightParams().getFuel() > 0) {
-            g.fillRect(xpos - FLAME_SIZE / 2, ypos + SIZE - FLAME_SIZE / 2,
-                    FLAME_SIZE, FLAME_SIZE);
+            drawFlame(xpos, ypos, g, r);
         }
         g.setColor(savedCol);
+    }
+
+    private void drawFlame(int xpos, int ypos, Graphics g, Rocket r) {
+        g.fillRect(xpos - FLAME_SIZE / 2, ypos + SIZE - FLAME_SIZE / 2,
+                FLAME_SIZE, FLAME_SIZE);
     }
 
     // MODIFIES: g
     // EFFECT: draws the flight path of the rocket
     private void drawFlightPath(Graphics g, Rocket r) {
         for (FlightParams fp : r.getFlightHistory()) {
-            int xpos = rocketXtoScreenX(fp);
-            int ypos = rocketYtoScreenY(fp);
+            int xpos = rocketXtoScreenX(fp) + SIZE / 2;
+            int ypos = rocketYtoScreenY(fp) - SIZE / 2;
             Color savedCol = g.getColor();
             g.setColor(Color.DARK_GRAY);
             g.fillRect(xpos, ypos + SIZE, 2, 2);

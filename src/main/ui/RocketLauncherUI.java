@@ -42,7 +42,8 @@ public class RocketLauncherUI extends JFrame {
         tabbedPane.addTab("Launch Rockets", launcherPanel);
         tabbedPane.addChangeListener(viewRocketsPanel);
         add(tabbedPane);
-        setPreferredSize(Toolkit.getDefaultToolkit().getScreenSize());
+        Dimension size = Toolkit.getDefaultToolkit().getScreenSize();
+        setPreferredSize(new Dimension((int) size.getWidth(), (int) size.getHeight() - 100));
         pack();
         centreOnScreen();
         setVisible(true);
