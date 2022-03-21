@@ -7,6 +7,9 @@ import model.flight.FlightParams;
 import javax.swing.*;
 import java.awt.*;
 
+import static model.Rocket.FLAME_SIZE;
+import static model.Rocket.SIZE;
+
 /*
  * Represents panel that will actually display the rocket's flight
  */
@@ -35,7 +38,7 @@ public class GamePanel extends JPanel {
     // MODIFIES: g
     // EFFECT: draws the line to represent the ground
     private void drawGround(Graphics g) {
-        int y = (int) Toolkit.getDefaultToolkit().getScreenSize().getHeight() - Y_OFFSET + Rocket.SIZE;
+        int y = (int) Toolkit.getDefaultToolkit().getScreenSize().getHeight() - Y_OFFSET + SIZE;
         int x1 = 0;
         int x2 = (int) Toolkit.getDefaultToolkit().getScreenSize().getWidth();
         Color savedCol = g.getColor();
@@ -64,12 +67,12 @@ public class GamePanel extends JPanel {
         int ypos = rocketYtoScreenY(r.getFlightParams());
         Color savedCol = g.getColor();
         g.setColor(Color.BLACK);
-        g.fillRect(xpos, ypos, Rocket.SIZE, Rocket.SIZE);
+        g.fillRect(xpos, ypos, SIZE, SIZE);
         drawFlightPath(g, r);
         g.setColor(Color.YELLOW);
         if (r.getFlightParams().getFuel() > 0) {
-            g.fillRect(xpos - Rocket.FlAME_SIZE / 2, ypos + Rocket.SIZE - Rocket.FlAME_SIZE / 2,
-                    Rocket.FlAME_SIZE, Rocket.FlAME_SIZE);
+            g.fillRect(xpos - FLAME_SIZE / 2, ypos + SIZE - FLAME_SIZE / 2,
+                    FLAME_SIZE, FLAME_SIZE);
         }
         g.setColor(savedCol);
     }
@@ -82,7 +85,7 @@ public class GamePanel extends JPanel {
             int ypos = rocketYtoScreenY(fp);
             Color savedCol = g.getColor();
             g.setColor(Color.DARK_GRAY);
-            g.fillRect(xpos, ypos + Rocket.SIZE, 2, 2);
+            g.fillRect(xpos, ypos + SIZE, 2, 2);
             g.setColor(savedCol);
         }
     }

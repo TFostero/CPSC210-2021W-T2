@@ -12,11 +12,10 @@ import java.util.Collections;
  */
 public class Rocket {
     public static final int SIZE = 10;
-    public static final int FlAME_SIZE = 5;
+    public static final int FLAME_SIZE = 4;
     private ArrayList<FlightParams> flightHistory;
     private FlightParams flightParams;
     private String name;
-
     private boolean rocketLaunchedFlag;
 
     // EFFECT: construct a new rocket object with given initial FlightParams

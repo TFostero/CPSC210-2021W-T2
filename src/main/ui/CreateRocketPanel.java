@@ -1,6 +1,8 @@
 package ui;
 
 import model.LaunchPad;
+import ui.Exceptions.InvalidAngleException;
+import ui.Exceptions.NegativeNumberException;
 
 import javax.swing.*;
 import java.awt.*;
@@ -18,6 +20,7 @@ public class CreateRocketPanel extends JPanel {
     private JTextField fuelField;
     private RocketLauncherUI ui;
     private LaunchPad pad;
+    private static final String INVALID_MESSAGE = "INVALID INPUT";
 
     // EFFECT: creates new create rocket panel with fields for name, angle, thrust, and fuel
     public CreateRocketPanel(RocketLauncherUI ui) {
@@ -40,7 +43,7 @@ public class CreateRocketPanel extends JPanel {
         fields.add(new JLabel("Create Rocket Panel"));
         fields.add(new JLabel("Rocket Name: "));
         fields.add(nameField);
-        fields.add(new JLabel("Launch Angle (deg): "));
+        fields.add(new JLabel("Launch Angle [0 - 90] (deg): "));
         fields.add(angleField);
         fields.add(new JLabel("Launch Thrust (kN): "));
         fields.add(thrustField);
@@ -61,18 +64,34 @@ public class CreateRocketPanel extends JPanel {
         @Override
         public void actionPerformed(ActionEvent evt) {
             String name = nameField.getText();
-            double angle = Double.parseDouble(angleField.getText());
-            double thrust = Double.parseDouble(thrustField.getText());
-            double fuel = Double.parseDouble(fuelField.getText());
-            angle = degreesToRads(angle);
-            thrust = thrust * KN_TO_N;
-            pad = ui.getLaunchPad();
-            pad.addRocket(angle, thrust, fuel, name);
-            nameField.setText("");
-            angleField.setText("");
-            thrustField.setText("");
-            fuelField.setText("");
+            try {
+                double angle = Double.parseDouble(angleField.getText()); // parseDouble will throw NumberFormatException
+                double thrust = Double.parseDouble(thrustField.getText());
+                double fuel = Double.parseDouble(fuelField.getText());
+                if (angle < 0 || thrust < 0 || fuel < 0) {
+                    throw new NegativeNumberException();
+                } else if (angle > 90) {
+                    throw new InvalidAngleException();
+                }
+                angle = degreesToRads(angle);
+                thrust = thrust * KN_TO_N;
+                pad = ui.getLaunchPad();
+                pad.addRocket(angle, thrust, fuel, name);
+                setFields("");
+            } catch (NumberFormatException e) {
+                System.out.println(INVALID_MESSAGE);
+                setFields(INVALID_MESSAGE);
+            }
         }
+    }
+
+    // MODIFIES: this
+    // EFFECT: sets the fields to the provided string
+    private void setFields(String s) {
+        nameField.setText(s);
+        angleField.setText(s);
+        thrustField.setText(s);
+        fuelField.setText(s);
     }
 
     // EFFECT: converts given radians to degrees
