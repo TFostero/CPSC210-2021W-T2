@@ -1,9 +1,9 @@
 package ui;
 
 import model.LaunchPad;
-import ui.Exceptions.EmptyNameException;
-import ui.Exceptions.InvalidAngleException;
-import ui.Exceptions.NegativeNumberException;
+import ui.exception.EmptyNameException;
+import ui.exception.InvalidAngleException;
+import ui.exception.NegativeNumberException;
 
 import javax.swing.*;
 import java.awt.*;
@@ -19,14 +19,14 @@ public class CreateRocketPanel extends JPanel {
     private JTextField angleField;
     private JTextField thrustField;
     private JTextField fuelField;
-    private RocketLauncherUI ui;
+    private RocketLauncherUI gui;
     private LaunchPad pad;
     private static final String INVALID_MESSAGE = "INVALID INPUT";
 
     // EFFECT: creates new create rocket panel with fields for name, angle, thrust, and fuel
-    public CreateRocketPanel(RocketLauncherUI ui) {
-        this.ui = ui;
-        this.pad = ui.getLaunchPad();
+    public CreateRocketPanel(RocketLauncherUI gui) {
+        this.gui = gui;
+        this.pad = gui.getLaunchPad();
         nameField = new JTextField("Name", 15);
         angleField = new JTextField("45", 15);
         thrustField = new JTextField("15",15);
@@ -78,7 +78,7 @@ public class CreateRocketPanel extends JPanel {
                 }
                 angle = degreesToRads(angle);
                 thrust = thrust * KN_TO_N;
-                pad = ui.getLaunchPad();
+                pad = gui.getLaunchPad();
                 pad.addRocket(angle, thrust, fuel, name);
                 setFields("");
             } catch (NumberFormatException e) {

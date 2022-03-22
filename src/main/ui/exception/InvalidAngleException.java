@@ -1,4 +1,4 @@
-package ui.Exceptions;
+package ui.exception;
 
 public class InvalidAngleException extends NumberFormatException {
 }

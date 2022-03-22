@@ -19,7 +19,7 @@ import static ui.CreateRocketPanel.radsToDegrees;
  */
 public class ViewRocketsPanel extends JPanel implements ChangeListener {
     private LaunchPad pad;
-    private RocketLauncherUI ui;
+    private RocketLauncherUI gui;
     private JScrollPane rocketDisplay;
     private JPanel buttons;
     private JPanel rocketsPanel;
@@ -27,9 +27,9 @@ public class ViewRocketsPanel extends JPanel implements ChangeListener {
 
 
     // EFFECT: creates a view rocket panel with save and load buttons
-    public ViewRocketsPanel(RocketLauncherUI ui) {
-        this.ui = ui;
-        pad = ui.getLaunchPad();
+    public ViewRocketsPanel(RocketLauncherUI gui) {
+        this.gui = gui;
+        pad = gui.getLaunchPad();
         rocketsPanel = new JPanel();
         rocketsPanel.setLayout(new BoxLayout(rocketsPanel, BoxLayout.PAGE_AXIS));
         rocketDisplay = new JScrollPane(rocketsPanel);
@@ -54,7 +54,7 @@ public class ViewRocketsPanel extends JPanel implements ChangeListener {
     // EFFECT: displays rocket launch parameters for each rocket
     public void displayRockets() {
         rocketsPanel.removeAll();
-        pad = ui.getLaunchPad();
+        pad = gui.getLaunchPad();
         List<Rocket> rockets = pad.getRockets();
         for (Rocket r : rockets) {
             String name = r.getName();
@@ -82,7 +82,7 @@ public class ViewRocketsPanel extends JPanel implements ChangeListener {
     // EFFECT: updates displayed rockets in View Rockets tab when tab is changed
     @Override
     public void stateChanged(ChangeEvent e) {
-        pad = ui.getLaunchPad();
+        pad = gui.getLaunchPad();
         displayRockets();
     }
 
@@ -95,7 +95,7 @@ public class ViewRocketsPanel extends JPanel implements ChangeListener {
         // EFFECT: saves rocket launch params and updates page
         @Override
         public void actionPerformed(ActionEvent evt) {
-            ui.saveRocketsLaunchParams();
+            gui.saveRocketsLaunchParams();
             displayRockets();
 
         }
@@ -110,7 +110,7 @@ public class ViewRocketsPanel extends JPanel implements ChangeListener {
         // EFFECT: loads saved rocket launch params and updates page
         @Override
         public void actionPerformed(ActionEvent evt) {
-            ui.loadRocketsLaunchParams();
+            gui.loadRocketsLaunchParams();
             displayRockets();
         }
     }
