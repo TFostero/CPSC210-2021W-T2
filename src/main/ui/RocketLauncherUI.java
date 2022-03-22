@@ -24,6 +24,7 @@ public class RocketLauncherUI extends JFrame {
     private JsonWriter jsonWriter;
     private JsonReader jsonReader;
     private static final String JSON_STORE = "./data/launchParams.json";
+    private static final int Y_OFFSET = 100;
 
     // EFFECT: Creates rocket launcher UI frame with a create rocket tab, a view rockets tab, and a launch rocket tab
     public RocketLauncherUI() {
@@ -43,7 +44,7 @@ public class RocketLauncherUI extends JFrame {
         tabbedPane.addChangeListener(viewRocketsPanel);
         add(tabbedPane);
         Dimension size = Toolkit.getDefaultToolkit().getScreenSize();
-        setPreferredSize(new Dimension((int) size.getWidth(), (int) size.getHeight() - 100));
+        setPreferredSize(new Dimension((int) size.getWidth(), (int) size.getHeight() - Y_OFFSET));
         pack();
         centreOnScreen();
         setVisible(true);
@@ -74,7 +75,7 @@ public class RocketLauncherUI extends JFrame {
     // EFFECTS:  location of frame is set so frame is centred on desktop
     private void centreOnScreen() {
         Dimension scrn = Toolkit.getDefaultToolkit().getScreenSize();
-        setLocation((scrn.width - getWidth()) / 2, (scrn.height - getHeight()) / 2);
+        setLocation((scrn.width - getWidth()) / 2, ((scrn.height - getHeight()) / 2) - Y_OFFSET / 2);
     }
 
     // MODIFIES: this

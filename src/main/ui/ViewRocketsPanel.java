@@ -23,6 +23,7 @@ public class ViewRocketsPanel extends JPanel implements ChangeListener {
     private JScrollPane rocketDisplay;
     private JPanel buttons;
     private JPanel rocketsPanel;
+    private static final int VERTICANL_SCROLL_INCREMENT = 30;
 
 
     // EFFECT: creates a view rocket panel with save and load buttons
@@ -32,7 +33,7 @@ public class ViewRocketsPanel extends JPanel implements ChangeListener {
         rocketsPanel = new JPanel();
         rocketsPanel.setLayout(new BoxLayout(rocketsPanel, BoxLayout.PAGE_AXIS));
         rocketDisplay = new JScrollPane(rocketsPanel);
-        rocketDisplay.getVerticalScrollBar().setUnitIncrement(30);
+        rocketDisplay.getVerticalScrollBar().setUnitIncrement(VERTICANL_SCROLL_INCREMENT);
         initButtons();
         displayRockets();
     }
@@ -50,7 +51,7 @@ public class ViewRocketsPanel extends JPanel implements ChangeListener {
     }
 
     // MODIFIES: this
-    // EFFECT: displays rocket launch parameters
+    // EFFECT: displays rocket launch parameters for each rocket
     public void displayRockets() {
         rocketsPanel.removeAll();
         pad = ui.getLaunchPad();

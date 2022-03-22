@@ -1,6 +1,7 @@
 package ui;
 
 import model.LaunchPad;
+import ui.Exceptions.EmptyNameException;
 import ui.Exceptions.InvalidAngleException;
 import ui.Exceptions.NegativeNumberException;
 
@@ -63,12 +64,14 @@ public class CreateRocketPanel extends JPanel {
         // EFFECT: adds a rocket to pad depending on data entered into fields when button is pressed
         @Override
         public void actionPerformed(ActionEvent evt) {
-            String name = nameField.getText();
             try {
+                String name = nameField.getText();
                 double angle = Double.parseDouble(angleField.getText()); // parseDouble will throw NumberFormatException
                 double thrust = Double.parseDouble(thrustField.getText());
                 double fuel = Double.parseDouble(fuelField.getText());
-                if (angle < 0 || thrust < 0 || fuel < 0) {
+                if (name.equals("")) {
+                    throw new EmptyNameException();
+                } else if (angle < 0 || thrust < 0 || fuel < 0) {
                     throw new NegativeNumberException();
                 } else if (angle > 90) {
                     throw new InvalidAngleException();
