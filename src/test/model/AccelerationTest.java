@@ -54,7 +54,7 @@ public class AccelerationTest {
     }
 
     @Test
-    void getAirDensityTest() {
+    void calcAirDensityTest() {
         double airDensity = testAccel.calcAirDensity(0);
         double testDensity = 0;
         try {

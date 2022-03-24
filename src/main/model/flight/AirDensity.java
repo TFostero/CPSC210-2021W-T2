@@ -40,13 +40,17 @@ public enum AirDensity {
         double density;
         for (AirDensity air : AirDensity.values()) {
             // if the altitude is less than the current zone altitude ceiling then use that zone, else go to next zone
-            if (altitude > Double.NEGATIVE_INFINITY && altitude <= air.getAltCeiling()) {
+            if (checkAirBounds(altitude, air.getAltCeiling())) {
                 density = air.getRefDensity()
                         * Math.exp((GRAVITY * M * (altitude - air.getRefAltitude())) / (R * air.getRefTemp()));
                 return density;
             }
         }
         throw new InvalidAltitudeException();
+    }
+
+    public static boolean checkAirBounds(double altitude, double altCeiling) {
+        return altitude > Double.NEGATIVE_INFINITY && altitude <= altCeiling;
     }
 
     double getRefAltitude() {
