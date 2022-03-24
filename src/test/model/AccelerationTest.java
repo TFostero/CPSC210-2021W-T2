@@ -1,13 +1,12 @@
 package model;
 
+import model.exception.InvalidAltitudeException;
 import model.flight.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 
 import static model.LaunchPad.*;
-import static model.LaunchPad.ROCKET_AREA;
-import static model.flight.Acceleration.*;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class AccelerationTest {
@@ -54,77 +53,19 @@ public class AccelerationTest {
         assertEquals(expectedY, testThrustAccel.getValY());
     }
 
-    /*
     @Test
-    void calcAirAccelTest() {
-        Acceleration testAirAccel = testAccel.calcAirAccel(testVel, testAlt, testAngle, testFuel);
-        double velMag = Math.hypot(testVel.getValX(), testVel.getValY());
-        double airDensity = testAccel.calcAirDensity(testAlt);
-        double dragForceMag = 0.5 * airDensity * Math.pow(velMag, 2) * DRAG_COEFFICIENT * ROCKET_AREA;
-        double dragForceX = -dragForceMag * Math.cos(testAngle);
-        double dragForceY = -dragForceMag * Math.sin(testAngle);
-        double expectedX = dragForceX / (EMPTY_MASS + testFuel);
-        double expectedY = dragForceY / (EMPTY_MASS + testFuel);
-        assertEquals(expectedX, testAirAccel.getValX());
-        assertEquals(expectedY, testAirAccel.getValY());
+    void getAirDensityTest() {
+        double airDensity = testAccel.calcAirDensity(0);
+        double testDensity = 0;
+        try {
+            testDensity = AirDensity.calcAirDensity(0);
+        } catch (InvalidAltitudeException e) {
+            fail("Should not have thrown exception");
+        }
+        assertEquals(testDensity, airDensity);
+
+        airDensity = testAccel.calcAirDensity(Double.NEGATIVE_INFINITY);
+        assertEquals(0, airDensity);
+
     }
-
-
-    @Test
-    void calcAirDensityZone0Test() {
-        testAccel.setReferenceValues(ZONE_0_ALT);
-        assertEquals(ZONE_0_REF_DENSITY, testAccel.getRefDensity());
-        assertEquals(ZONE_0_ALT, testAccel.getRefAlt());
-        assertEquals(ZONE_0_REF_TEMP, testAccel.getRefTemp());
-    }
-
-    @Test
-    void calcAirDensityZone1Test() {
-        testAccel.setReferenceValues(ZONE_1_ALT);
-        assertEquals(ZONE_1_REF_DENSITY, testAccel.getRefDensity());
-        assertEquals(ZONE_1_ALT, testAccel.getRefAlt());
-        assertEquals(ZONE_1_REF_TEMP, testAccel.getRefTemp());
-    }
-
-    @Test
-    void calcAirDensityZone2Test() {
-        testAccel.setReferenceValues(ZONE_2_ALT);
-        assertEquals(ZONE_2_REF_DENSITY, testAccel.getRefDensity());
-        assertEquals(ZONE_2_ALT, testAccel.getRefAlt());
-        assertEquals(ZONE_2_REF_TEMP, testAccel.getRefTemp());
-    }
-
-    @Test
-    void calcAirDensityZone3Test() {
-        testAccel.setReferenceValues(ZONE_3_ALT);
-        assertEquals(ZONE_3_REF_DENSITY, testAccel.getRefDensity());
-        assertEquals(ZONE_3_ALT, testAccel.getRefAlt());
-        assertEquals(ZONE_3_REF_TEMP, testAccel.getRefTemp());
-    }
-
-    @Test
-    void calcAirDensityZone4Test() {
-        testAccel.setReferenceValues(ZONE_4_ALT);
-        assertEquals(ZONE_4_REF_DENSITY, testAccel.getRefDensity());
-        assertEquals(ZONE_4_ALT, testAccel.getRefAlt());
-        assertEquals(ZONE_4_REF_TEMP, testAccel.getRefTemp());
-    }
-
-    @Test
-    void calcAirDensityZone5Test() {
-        testAccel.setReferenceValues(ZONE_5_ALT);
-        assertEquals(ZONE_5_REF_DENSITY, testAccel.getRefDensity());
-        assertEquals(ZONE_5_ALT, testAccel.getRefAlt());
-        assertEquals(ZONE_5_REF_TEMP, testAccel.getRefTemp());
-    }
-
-    @Test
-    void calcAirDensityZone6Test() {
-        testAccel.setReferenceValues(ZONE_6_ALT);
-        assertEquals(ZONE_6_REF_DENSITY, testAccel.getRefDensity());
-        assertEquals(ZONE_6_ALT, testAccel.getRefAlt());
-        assertEquals(ZONE_6_REF_TEMP, testAccel.getRefTemp());
-    }
-
-     */
 }

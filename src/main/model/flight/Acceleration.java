@@ -1,6 +1,5 @@
 package model.flight;
 
-import javafx.geometry.Pos;
 import model.exception.InvalidAltitudeException;
 
 import static model.LaunchPad.*;
@@ -34,17 +33,23 @@ public class Acceleration extends XYData {
     // EFFECT: returns acceleration of rocket due to air resistance
     public Acceleration calcAirAccel(Velocity vel, double alt, double angle, double fuel) {
         double velMag = Math.hypot(vel.getValX(), vel.getValY());
-        double airDensity = 0;
-        try {
-            airDensity = AirResistance.calcAirDensity(alt);
-        } catch (InvalidAltitudeException e) {
-            // Invalid Altitude
-        }
+        double airDensity = calcAirDensity(alt);
         double dragForceMag = 0.5 * airDensity * Math.pow(velMag, 2) * DRAG_COEFFICIENT * ROCKET_AREA;
         double dragForceX = -dragForceMag * Math.cos(angle);
         double dragForceY = -dragForceMag * Math.sin(angle);
         double airAccelX = dragForceX / (EMPTY_MASS + fuel);
         double airAccelY = dragForceY / (EMPTY_MASS + fuel);
         return new Acceleration(airAccelX, airAccelY);
+    }
+
+    // EFFECT: returns air density using method in AirDensity enum
+    public double calcAirDensity(double alt) {
+        double airDensity;
+        try {
+            airDensity = AirDensity.calcAirDensity(alt);
+        } catch (InvalidAltitudeException e) {
+            airDensity = 0;
+        }
+        return airDensity;
     }
 }

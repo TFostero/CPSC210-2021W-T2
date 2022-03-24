@@ -5,9 +5,10 @@ import model.exception.InvalidAltitudeException;
 import static model.LaunchPad.GRAVITY;
 
 /*
- * Used to calculate air density so that acceleration due to air resistance can be calculated
+ * Used to calculate air density so that acceleration due to air resistance can be calculated.
+ * Only needed for one function where altitude is input and air density is output.
  */
-public enum AirResistance {
+public enum AirDensity {
     ZONE0(0, 11000, 1.225, 288.15),
     ZONE1(11000, 20000, 0.36391, 216.65),
     ZONE2(20000, 32000, 0.08803, 216.65),
@@ -26,7 +27,7 @@ public enum AirResistance {
 
     // EFFECT: creates air resistance enumeration object with reference
     //         altitude, density, and temperature
-    AirResistance(double refAltitude, double altCeiling, double refDensity, double refTemp) {
+    AirDensity(double refAltitude, double altCeiling, double refDensity, double refTemp) {
         this.refAltitude = refAltitude;
         this.altCeiling = altCeiling;
         this.refDensity = refDensity;
@@ -36,8 +37,8 @@ public enum AirResistance {
     // EFFECT: returns air density depending on altitude provided
     //         (from barometric formula wikipedia page)
     public static double calcAirDensity(double altitude) throws InvalidAltitudeException {
-        double density = 0;
-        for (AirResistance air : AirResistance.values()) {
+        double density;
+        for (AirDensity air : AirDensity.values()) {
             // if the altitude is less than the current zone altitude ceiling then use that zone, else go to next zone
             if (altitude > Double.NEGATIVE_INFINITY && altitude <= air.getAltCeiling()) {
                 density = air.getRefDensity()
