@@ -54,6 +54,7 @@ public class AccelerationTest {
         assertEquals(expectedY, testThrustAccel.getValY());
     }
 
+    /*
     @Test
     void calcAirAccelTest() {
         Acceleration testAirAccel = testAccel.calcAirAccel(testVel, testAlt, testAngle, testFuel);
@@ -67,6 +68,7 @@ public class AccelerationTest {
         assertEquals(expectedX, testAirAccel.getValX());
         assertEquals(expectedY, testAirAccel.getValY());
     }
+
 
     @Test
     void calcAirDensityZone0Test() {
@@ -123,4 +125,6 @@ public class AccelerationTest {
         assertEquals(ZONE_6_ALT, testAccel.getRefAlt());
         assertEquals(ZONE_6_REF_TEMP, testAccel.getRefTemp());
     }
+
+     */
 }
