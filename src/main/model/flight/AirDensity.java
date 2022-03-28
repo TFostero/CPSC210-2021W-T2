@@ -49,6 +49,7 @@ public enum AirDensity {
         throw new InvalidAltitudeException();
     }
 
+    // EFFECT: returns true if altitude is within altitude ceiling
     public static boolean checkAirBounds(double altitude, double altCeiling) {
         return altitude > Double.NEGATIVE_INFINITY && altitude <= altCeiling;
     }

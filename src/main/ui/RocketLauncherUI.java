@@ -1,5 +1,7 @@
 package ui;
 
+import model.Event;
+import model.EventLog;
 import model.LaunchPad;
 import model.Rocket;
 import persistence.JsonReader;
@@ -38,10 +40,7 @@ public class RocketLauncherUI extends JFrame {
         createRocketPanel = new CreateRocketPanel(this);
         viewRocketsPanel = new ViewRocketsPanel(this);
         launcherPanel = new LauncherPanel(this);
-        tabbedPane.addTab("Create Rocket", createRocketPanel);
-        tabbedPane.addTab("View Rockets", viewRocketsPanel);
-        tabbedPane.addTab("Launch Rockets", launcherPanel);
-        tabbedPane.addChangeListener(viewRocketsPanel);
+        setupTabbedPanes(tabbedPane);
         add(tabbedPane);
         Dimension size = Toolkit.getDefaultToolkit().getScreenSize();
         setPreferredSize(new Dimension((int) size.getWidth(), (int) size.getHeight() - Y_OFFSET));
@@ -49,6 +48,17 @@ public class RocketLauncherUI extends JFrame {
         centreOnScreen();
         setVisible(true);
         addTimer();
+        setupCloseOperation();
+    }
+
+
+    // MODIFIES: this
+    // EFFECT: adds panels to the tabbed pane and then adds a change listener
+    private void setupTabbedPanes(JTabbedPane tabbedPane) {
+        tabbedPane.addTab("Create Rocket", createRocketPanel);
+        tabbedPane.addTab("View Rockets", viewRocketsPanel);
+        tabbedPane.addTab("Launch Rockets", launcherPanel);
+        tabbedPane.addChangeListener(viewRocketsPanel);
     }
 
     // EFFECT:  initializes a timer that updates rockets each
@@ -99,6 +109,26 @@ public class RocketLauncherUI extends JFrame {
             System.out.println("Loaded launch parameters from " + JSON_STORE);
         } catch (IOException e) {
             System.out.println("Unable to read from file: " + JSON_STORE);
+        }
+    }
+
+    // MODIFIES: this
+    // EFFECT: adds an action to the close window event
+    private void setupCloseOperation() {
+        addWindowListener(new java.awt.event.WindowAdapter() {
+
+            // EFFECT: prints the event log on window close
+            @Override
+            public void windowClosing(java.awt.event.WindowEvent windowEvent) {
+                printLog(EventLog.getInstance());
+            }
+        });
+    }
+
+    // EFFECT: prints entries in the event log
+    public static void printLog(EventLog el) {
+        for (Event next : el) {
+            System.out.println(next.toString() + "\n\n");
         }
     }
 

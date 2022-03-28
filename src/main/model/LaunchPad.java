@@ -49,6 +49,7 @@ public class LaunchPad {
                 START_TIME);
         Rocket rocket = new Rocket(flightParams, name);
         rockets.add(rocket);
+        EventLog.getInstance().logEvent(new Event("Rocket " + name + " added to launch pad."));
     }
 
     // MODIFIES: this

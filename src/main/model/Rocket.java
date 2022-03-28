@@ -99,7 +99,13 @@ public class Rocket {
         return rocketLaunchedFlag;
     }
 
+    // MODIFIES: this
+    // EFFECT: sets rocket launched flag to provided boolean
+    //         if provided boolean is true, log event as a rocket launch
     public void setRocketLaunchedFlag(boolean rocketLaunchedFlag) {
+        if (rocketLaunchedFlag) {
+            EventLog.getInstance().logEvent(new Event("Rocket " + name + " launched."));
+        }
         this.rocketLaunchedFlag = rocketLaunchedFlag;
     }
 

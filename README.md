@@ -22,3 +22,15 @@ game to try to launch rockets into orbit.
 - as a user, I'd like to be able to see the rockets position, velocity, acceleration, and flight angle over time
 - as a user, I'd like to have to option to save the rockets I've created before launching them
 - as a user, I'd like to be able to load the rockets that I previously saved before they were launched
+
+
+## Phase 4: Task 2
+Mon Mar 28 10:10:36 PDT 2022
+Rocket Test Rocket added to launch pad.
+
+Mon Mar 28 10:10:38 PDT 2022
+Rocket Test Rocket launched.
+
+If nothing is output when the program closes it could indicate that no rockets were added to the program and
+that no rockets were loaded and launched. It could also be caused by something going wrong that causes the function that
+prints the log to console not being run when the program is closed.
