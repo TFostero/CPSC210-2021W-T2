@@ -32,5 +32,6 @@ Mon Mar 28 10:10:38 PDT 2022
 Rocket Test Rocket launched.
 
 If nothing is output when the program closes it could indicate that no rockets were added to the program and
-that no rockets were loaded and launched. It could also be caused by something going wrong that causes the function that
-prints the log to console not being run when the program is closed.
+that no rockets were loaded and launched so the event log was empty. It could also be caused by something going wrong 
+that causes the function that prints the log to console not being run when the program is closed, like if the program
+crashes.
