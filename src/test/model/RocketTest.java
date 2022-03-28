@@ -126,6 +126,8 @@ class RocketTest {
         assertFalse(testRocket.getRocketLaunchedFlag());
         testRocket.setRocketLaunchedFlag(true);
         assertTrue(testRocket.getRocketLaunchedFlag());
+        testRocket.setRocketLaunchedFlag(false);
+        assertFalse(testRocket.getRocketLaunchedFlag());
     }
 
 }
